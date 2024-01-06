@@ -136,11 +136,11 @@ public class MappaManager {
     public String toString() {
 
         return "@log\n\n" +
-                "@primoPuntoDiSelezione::(" + rigaPrimoPuntoDiSelezione + "," + colonnaPrimoPuntoDiSelezione + ")" +
-                " @secondPuntoDiSelezione::(" + rigaSecondoPuntoDiSelezione + "," + colonnaSecondoPuntoDiSelezione + ")" +
-                " @totaleEntitaPiazzate::" + totaleEntitaPiazzate +
-                " @larghezzaSelezione::" + larghezzaSelezione +
-                " @altezzaSelezione::" + altezzaSelezione +
-                " @totaleCelleAreaSelezione::" + totaleCelleAreaSelezione;
+                "@primoPuntoDiSelezione::(" + rigaPrimoPuntoDiSelezione + "," + colonnaPrimoPuntoDiSelezione + ")" + " " +
+                "@secondPuntoDiSelezione::(" + rigaSecondoPuntoDiSelezione + "," + colonnaSecondoPuntoDiSelezione + ")" + " " +
+                "@totaleEntitaPiazzate::" + totaleEntitaPiazzate + " " +
+                "@larghezzaSelezione::" + larghezzaSelezione + " " +
+                "@altezzaSelezione::" + altezzaSelezione + " " +
+                "@totaleCelleAreaSelezione::" + totaleCelleAreaSelezione;
     }
 }
