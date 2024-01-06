@@ -5,8 +5,11 @@ import unisa.it.is.project.fia.project.Enum.LOD;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EntitaManager {
     private static final EntitaManager epm = new EntitaManager();
@@ -52,6 +55,65 @@ public class EntitaManager {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Imposta il numero di volte che un'entità è presente sulla mappa per ogni entità.
+     *
+     * @author Giovanni Carbone
+     */
+    private void setOgniNumeroTotaleSullaMappa() {
+
+        MappaManager mm = MappaManager.getInstance();
+
+        List<Integer> ids = new ArrayList<>();
+
+        int[][] mappa = mm.getMappa();
+
+        for (int[] riga : mappa) {
+            for (int id : riga)
+
+                if (!ids.contains(id) && id > 0) {
+
+                    ids.add(id);
+                    EntitaEntity entita = new EntitaEntity();
+                    entita.setId(id);
+                    entita.setNumeroTotaleSullaMappa(1);
+                    listaEntita.add(entita);
+
+                } else if (ids.contains(id) && id > 0) {
+
+                    for (EntitaEntity entita : listaEntita)
+                        if (entita.getId() == id)
+                            entita.setNumeroTotaleSullaMappa(entita.getNumeroTotaleSullaMappa() + 1);
+
+                }
+        }
+    }
+
+    /**
+     * Imposta il numero di volte che un'entità è presente sulla mappa in percentuale per ogni entità.
+     *
+     * @author Giovanni Carbone
+     */
+    private void setOgniNumeroTotaleSullaMappaPercentuale() {
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setDecimalSeparator('.');
+
+        DecimalFormat df = new DecimalFormat("#.##", symbols);
+
+        MappaManager mm = MappaManager.getInstance();
+        int totaleEntitaPiazzate = mm.getTotaleEntitaPiazzate();
+
+        for(EntitaEntity entita : listaEntita) {
+            float totaleSullaMappaPercentuale = (float) entita.getNumeroTotaleSullaMappa() / totaleEntitaPiazzate;
+
+            String formattedTotalOverMapRate = df.format(totaleSullaMappaPercentuale * 100f);
+
+            totaleSullaMappaPercentuale = Float.parseFloat(formattedTotalOverMapRate);
+            entita.setNumeroTotaleSullaMappaPercentuale(totaleSullaMappaPercentuale);
         }
     }
 
@@ -127,6 +189,53 @@ public class EntitaManager {
     }
 
     /**
+     * Imposta il numero di volte che un'entità deve essere ancora piazzata all'interno dell'area selezionata.
+     * Inizialmente è pari al numero di volte da piazzare sulla selezione.
+     *
+     * @author Giovanni Carbone
+     */
+    private void setOgniDaPiazzareSullaSelezione() {
+        for(EntitaEntity entita : listaEntita)
+            entita.setDaPiazzareSullaSelezione(entita.getNumeroTotaleSullaSelezione());
+    }
+
+    /**
+     * Imposta il LOD di ogni entità.
+     *
+     * @author Giovanni Carbone
+     */
+    private void setOgniLOD() {
+
+        EntitaEntity entitaConPercentualeMinore = listaEntita.get(0);
+        EntitaEntity entitaConPercentualeMaggiore = listaEntita.get(0);
+
+        float percentualeMinima = entitaConPercentualeMinore.getNumeroTotaleSullaMappaPercentuale();
+        float percentualeMassima = entitaConPercentualeMaggiore.getNumeroTotaleSullaMappaPercentuale();
+
+        for(int i = 1; i < listaEntita.size(); i++) {
+            if (listaEntita.get(i).getNumeroTotaleSullaMappaPercentuale() < percentualeMinima)
+                percentualeMinima = listaEntita.get(i).getNumeroTotaleSullaMappaPercentuale();
+            else if (listaEntita.get(i).getNumeroTotaleSullaMappaPercentuale() > percentualeMassima)
+                percentualeMassima = listaEntita.get(i).getNumeroTotaleSullaMappaPercentuale();
+        }
+
+        float splitCentrale = (percentualeMinima + percentualeMassima) / 2;
+        float splitSinistro = (percentualeMinima + splitCentrale) / 2;
+        float splitDestro = (splitCentrale + percentualeMassima) / 2;
+
+        for(EntitaEntity entita : listaEntita){
+            float numeroTotaleSullaMappaPercentuale = entita.getNumeroTotaleSullaMappaPercentuale();
+
+            if(numeroTotaleSullaMappaPercentuale >= percentualeMinima && numeroTotaleSullaMappaPercentuale < splitSinistro)
+                entita.setLOD(LOD.HIGH_LOD);
+            else if(numeroTotaleSullaMappaPercentuale >= splitSinistro && numeroTotaleSullaMappaPercentuale < splitDestro)
+                entita.setLOD(LOD.MEDIUM_LOD);
+            else if(numeroTotaleSullaMappaPercentuale >= splitDestro && numeroTotaleSullaMappaPercentuale <= percentualeMassima)
+                entita.setLOD(LOD.LOW_LOD);
+        }
+    }
+
+    /**
      * Restituisce la lista di entità che ha come LOD quello passato come parametro.
      *
      * @param LOD LOD usato come filtro.
@@ -142,6 +251,38 @@ public class EntitaManager {
                 entitaByLOD.add(entita.clone());
 
         return entitaByLOD;
+    }
+
+    /**
+     * Restituisce un intero rappresentativo della somma del numero di entità sulla selezione che hanno come LOD quello passato come parametro.
+     *
+     * @param LOD LOD usato come filtro.
+     * @return Intero rappresentativo della somma del numero di entità sulla selezione.
+     * @author Giovanni Carbone
+     */
+    public int getNumeroTotaleSullaSelezioneByLOD(LOD LOD) {
+
+        List<EntitaEntity> entitaByLOD = getEntitaByLOD(LOD);
+
+        return entitaByLOD.stream().mapToInt(EntitaEntity::getNumeroTotaleSullaSelezione).sum();
+    }
+
+    /**
+     * Restituisce il LOD dato un identificativo di un'entità.
+     *
+     * @param id Identificativo univoco usato per la ricerca del LOD.
+     * @return LOD dell'entità trovata.
+     * @author Giovanni Carbone
+     */
+    public LOD getLODById(int id) {
+
+        LOD LOD = null;
+
+        for(EntitaEntity entita : listaEntita)
+            if(entita.getId() == id)
+                LOD = entita.getLOD();
+
+        return LOD;
     }
 
     @Override
