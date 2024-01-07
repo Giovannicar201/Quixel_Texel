@@ -306,4 +306,104 @@ public class IndividuoEntity {
 
         return Kruskal.computaMinSTCompletamenteConnesso(vertici,archi);
     }
+
+    /**
+     * Calcola la valutazione finale dell'individuo sulla base della prima e della seconda funzione di fitness combinate.
+     *
+     * @author Giovanni Carbone
+     */
+    public float getValutazione() {
+
+        valutazione = (PESO_PRIMA_FUNZIONE_DI_FITNESS * primaFunzioneDiFitness() + PESO_SECONDA_FUNZIONE_DI_FITNESS * secondaFunzioneDiFitness()) / (PESO_PRIMA_FUNZIONE_DI_FITNESS + PESO_SECONDA_FUNZIONE_DI_FITNESS);
+
+        return valutazione;
+    }
+
+    /**
+     * Controlla se l'individuo è valido, ovvero se rispetta tutti i vincoli relativi al numero di entità piazzate per ogni identificativo.
+     *
+     * @param mappaDelleOccorrenze Map che contiene il numero di occorrenze di un'entità all'interno dell'individuo.
+     * @author Giovanni Carbone
+     */
+    public boolean isValid(Map<Integer,Integer> mappaDelleOccorrenze) {
+
+        for (Map.Entry<Integer, Integer> entry : mappaDelleOccorrenze.entrySet())
+            if (entry.getValue() != 0)
+                return false;
+
+        return true;
+    }
+
+    /**
+     * Recupera un individuo non valido rendendolo valido.
+     *
+     * @param mappaDelleOccorrenze Map che contiene il numero di occorrenze di un'entità all'interno dell'individuo.
+     * @author Giovanni Carbone
+     */
+    public void recovery(Map<Integer,Integer> mappaDelleOccorrenze) {
+
+        EntitaManager em = EntitaManager.getInstance();
+
+        int idDaRimpiazzare = 0;
+        int nuovoId = 0;
+
+        while(!this.isValid(mappaDelleOccorrenze)) {
+
+            for (Map.Entry<Integer, Integer> entry : mappaDelleOccorrenze.entrySet())
+                if (entry.getValue() > 0) {
+
+                    nuovoId = entry.getKey();
+                    entry.setValue(entry.getValue() - 1);
+
+                    break;
+                }
+
+            for (Map.Entry<Integer, Integer> entry : mappaDelleOccorrenze.entrySet())
+                if (entry.getValue() < 0) {
+
+                    idDaRimpiazzare = entry.getKey();
+                    entry.setValue(entry.getValue() + 1);
+
+                    break;
+                }
+
+            this.rimpiazza(idDaRimpiazzare,nuovoId);
+        }
+    }
+
+    /**
+     * Rimpiazza un identificativo di un'entità piazzata con l'identificativo di una seconda entità.
+     *
+     * @author Giovanni Carbone
+     */
+    private void rimpiazza(int idDaRimpiazzare, int nuovoId) {
+
+        for (int riga = 0; riga < areaSelezionata.length; riga++) {
+            for (int colonna = 0; colonna < areaSelezionata[0].length; colonna++) {
+
+                if (areaSelezionata[riga][colonna] == idDaRimpiazzare) {
+
+                    areaSelezionata[riga][colonna] = nuovoId;
+
+                    return;
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder risultato = new StringBuilder("@individual::");
+
+        for (int[] riga : areaSelezionata) {
+            risultato.append("\n");
+            for (int id : riga)
+                risultato.append(id).append("\t");
+        }
+
+        risultato.append("\n@valutazione::").append(valutazione).append("\n");
+
+        return risultato.toString();
+    }
 }
