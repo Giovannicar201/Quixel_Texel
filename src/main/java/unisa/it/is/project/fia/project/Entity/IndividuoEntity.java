@@ -5,6 +5,7 @@ import lombok.Setter;
 import unisa.it.is.project.fia.project.Enum.LOD;
 import unisa.it.is.project.fia.project.Manager.EntitaManager;
 import unisa.it.is.project.fia.project.Manager.MappaManager;
+import unisa.it.is.project.fia.project.Utility.Kruskal;
 
 import java.util.*;
 
@@ -21,7 +22,7 @@ public class IndividuoEntity {
     /**
      * Crea un individuo rappresentativo dell'area selezionata all'interno della quale verranno piazzate le entità generate.
      *
-     * @author Giovanni Carbone
+     * @author Angelo Antonio Prisco
      */
     public IndividuoEntity() {
 
@@ -208,5 +209,101 @@ public class IndividuoEntity {
             if(riga >= altezzaSelezione)
                 break;
         }
+    }
+
+    /**
+     * Calcola la prima funzione di fitness a partire dalle caratteristiche dell'individuo.
+     * La prima funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del maximum spanning tree ottenuto a partire
+     * da un grafo completamente connesso, il quale ha come vertici tutte le entità più importanti. Tale valore va massimizzato siccome è desiderabile che le
+     * entità più importanti siano quanto più distanti tra di loro.
+     *
+     * @author Angelo Antonio Prisco
+     */
+    private float primaFunzioneDiFitness() {
+
+        EntitaManager em = EntitaManager.getInstance();
+
+        List<String> vertici = new ArrayList<>();
+        List<ArcoEntity> archi = new ArrayList<>();
+
+        List<EntitaPiazzataEntity> entita = new ArrayList<>();
+
+        for (int riga = 0; riga < areaSelezionata.length; riga++) {
+            for (int colonna = 0; colonna < areaSelezionata[riga].length; colonna++) {
+
+                EntitaPiazzataEntity entitaPiazzata = new EntitaPiazzataEntity(areaSelezionata[riga][colonna], riga, colonna);
+
+                if (em.getLODById(entitaPiazzata.getId()) == LOD.HIGH_LOD) {
+
+                    entita.add(entitaPiazzata);
+                    vertici.add(entitaPiazzata.toString());
+
+                }
+            }
+        }
+
+        for(int i = 0; i < entita.size(); i++) {
+
+            EntitaPiazzataEntity entitaPiazzataV = entita.get(i);
+
+            for(int j = i + 1; j < entita.size(); j++) {
+
+                EntitaPiazzataEntity entitaPiazzataW = entita.get(j);
+
+                ArcoEntity arco = new ArcoEntity(entitaPiazzataV,entitaPiazzataW);
+
+                archi.add(arco);
+            }
+        }
+
+        return Kruskal.computaMaxSTCompletamenteConnesso(vertici,archi);
+    }
+
+    /**
+     * Calcola la seconda funzione di fitness a partire dalle caratteristiche dell'individuo.
+     * La seconda funzione di fitness è rappresentata dall valore ottenuto sommando gli archi del minimum spanning tree ottenuto a partire
+     * da un grafo completamente connesso, il quale ha come vertici tutte le entità meno importanti. Tale valore va minimizzato siccome è desiderabile che le
+     * entità meno importanti siano quanto meno distanti tra di loro.
+     *
+     * @author Angelo Antonio Prisco
+     */
+    private float secondaFunzioneDiFitness() {
+
+        EntitaManager em = EntitaManager.getInstance();
+
+        List<String> vertici = new ArrayList<>();
+        List<ArcoEntity> archi = new ArrayList<>();
+
+        List<EntitaPiazzataEntity> entita = new ArrayList<>();
+
+        for (int riga = 0; riga < areaSelezionata.length; riga++) {
+            for (int colonna = 0; colonna < areaSelezionata[riga].length; colonna++) {
+
+                EntitaPiazzataEntity entitaPiazzata = new EntitaPiazzataEntity(areaSelezionata[riga][colonna], riga, colonna);
+
+                if (em.getLODById(entitaPiazzata.getId()) == LOD.LOW_LOD) {
+
+                    entita.add(entitaPiazzata);
+                    vertici.add(entitaPiazzata.toString());
+
+                }
+            }
+        }
+
+        for(int i = 0; i < entita.size(); i++) {
+
+            EntitaPiazzataEntity entitaPiazzataV = entita.get(i);
+
+            for(int j = i + 1; j < entita.size(); j++) {
+
+                EntitaPiazzataEntity entitaPiazzataW = entita.get(j);
+
+                ArcoEntity arco = new ArcoEntity(entitaPiazzataV,entitaPiazzataW);
+
+                archi.add(arco);
+            }
+        }
+
+        return Kruskal.computaMinSTCompletamenteConnesso(vertici,archi);
     }
 }
