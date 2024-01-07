@@ -2,7 +2,6 @@ package unisa.it.is.project.fia.project.Manager;
 
 import unisa.it.is.project.fia.project.Utility.Parser;
 import org.json.simple.parser.ParseException;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class MappaManager {
      */
     private void generaLog() {
 
-        String filePath = "src\\main\\java\\it\\unisa\\IS_Project\\AI\\Logs\\mappaLog.txt";
+        String filePath = "src\\main\\java\\unisa\\it\\is\\project\\fia\\project\\Logs\\mappaLog.txt";
 
         try {
 

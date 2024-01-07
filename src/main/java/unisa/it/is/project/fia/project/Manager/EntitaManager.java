@@ -45,7 +45,7 @@ public class EntitaManager {
      */
     private void generaLog() {
 
-        String filePath = "src\\main\\java\\it\\unisa\\IS_Project\\AI\\Logs\\entitaLog.txt";
+        String filePath = "src\\main\\java\\unisa\\it\\is\\project\\fia\\project\\Logs\\entitaLog.txt";
 
         try {
 
