@@ -1,0 +1,168 @@
+body {
+
+    background-color: #3F3F3F;
+    color: #B7B7B7;
+    margin: 0;
+    font-family: "JetBrains Mono ExtraBold";
+    font-size: 13px;
+
+}
+
+label{
+
+    font-family: "JetBrains Mono";
+    margin-bottom: 4px;
+
+}
+
+.entityDiv {
+
+    width: 352px;
+    height: 150px;
+    display: grid;
+    background-color: #1A1A1A;
+    grid-template-columns: repeat(5, 64px);
+    grid-gap: 8px;
+
+}
+
+.break{
+
+    background-color: #1A1A1A;
+    width: 448px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 32px;
+
+}
+
+.divBreak{
+
+    background-color: #333333;
+    width: 416px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    align-items: center;
+
+}
+
+.inputForm{
+
+    display: block;
+    background-color: #1A1A1A;
+    text-align: center;
+    color: #B7B7B7;
+    width: 352px;
+    height: 20px;
+    border: none;
+    border-radius: 2%;
+
+}
+
+.bottone{
+
+    display: block;
+    background-color: #333333;
+    text-align: center;
+    border: none;
+    color: #B7B7B7;
+    text-decoration: none;
+    width: 352px;
+    height: 24px;
+
+}
+
+.bottone:hover{
+
+    background-color: #516f96;
+
+}
+
+.iconTitle{
+
+    width: 16px;
+    height: 16px;
+    margin: 4px 4px 4px 8px;
+
+}
+
+.titleBar label{
+
+    margin-top: 4px;
+    margin-left: 4px;
+    position: relative;
+
+}
+
+.titleBar{
+
+    background-color: #3F3F3F;
+    width: inherit;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    block-size: fit-content;
+
+}
+
+.pressed{
+
+    filter: invert(40%) sepia(42%) saturate(423%) hue-rotate(174deg) brightness(94%) contrast(94%);
+
+
+}
+
+.breakBar{
+
+    left: 8px;
+    display: block;
+
+}
+
+.tools{
+
+    cursor: pointer;
+    width: fit-content;
+    margin-block: 18px;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    appearance: none;
+
+}
+
+.breakDivAction{
+
+    background-color: #3F3F3F;
+    width: 400px;
+    position: relative;
+    right: 0;
+    margin: 32px 8px 8px;
+    border-radius: 2%;
+    height: auto;
+    display: grid;
+    align-items: start;
+    block-size: fit-content;
+    padding-left: 14px;
+    box-sizing: border-box;
+}
+
+.topActionDiv{
+
+    margin: 24px 8px 16px 8px;
+    display: grid;
+    justify-content: normal;
+    align-items: center;
+
+}
+
+.actionDiv{
+
+    margin: 8px 8px 16px 8px;
+    display: grid;
+    align-items: center;
+
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign-up & Log-in</title>
+
+  <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
+
+</head>
+
+<body>
+
+<div style="position: absolute; top: 50%; left: 28%; font-size: 23px;">
+
+  Nessuna Anteprima
+
+</div>
+
+<div class = "break">
+
+  <div  style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+
+    <button id="auth" class = "tools breakBar" onclick="creaFormLoginERegistrazione()">
+      <img src="https://i.postimg.cc/xdwxc1w6/user.png">
+    </button>
+
+  </div>
+
+  <div th:if="${#ctx.session.isEmpty()}" id="login" class="divBreak"></div>
+
+  <div th:unless="${#ctx.session.isEmpty()}" id="logout" class="divBreak">
+
+    <div class="breakDivAction" id="logoutDiv">
+
+      <label style="margin-left: 8px; margin-top: 8px">Sign-up</label>
+
+      <div class="topActionDiv">
+
+        <button class="bottone" onclick="logout()">Log-Out</button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src = "@{/js/GAC/GAC.js}"></script>
+
+</html>
