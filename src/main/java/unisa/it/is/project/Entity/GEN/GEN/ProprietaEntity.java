@@ -1,4 +1,4 @@
-package unisa.it.is.project.Entity;
+package unisa.it.is.project.Entity.GEN.GEN;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

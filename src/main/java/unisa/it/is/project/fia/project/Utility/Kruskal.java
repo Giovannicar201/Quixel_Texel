@@ -6,7 +6,6 @@ import org.jgrapht.alg.spanning.KruskalMinimumSpanningTree;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import unisa.it.is.project.fia.project.Entity.ArcoEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
