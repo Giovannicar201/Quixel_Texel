@@ -1,0 +1,57 @@
+.topmenu{
+
+    background-color: #262727;
+    height: 32px;
+    width: 100%;
+    display: flex;
+    z-index: 3000;
+    position: fixed;
+
+}
+
+.topmenu ul{
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.topmenu li{
+
+    float: left;
+    top: 20%;
+    position: relative;
+
+}
+
+.topmenu li a{
+
+    color: #B7B7B7;
+    font-size: 13px;
+    font-family: "JetBrains Mono";
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+.topmenu li a:hover:not(.active) {
+    background-color: #3F3F3F;
+}
+
+.logo{
+
+    width: 16px;
+    height: 16px;
+    margin: 6px 10px 4px 8px;
+
+}
+
+.schiacciato{
+
+    background-color: #3F3F3F;
+
+}
