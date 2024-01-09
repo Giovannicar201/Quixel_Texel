@@ -20,6 +20,15 @@ public class Validator {
     private static final String NOME_UTENTE_REGEX = "^[a-zA-Z]{1,32}$";
     private static final Pattern NOME_UTENTE_PATTERN = Pattern.compile(NOME_UTENTE_REGEX);
 
+    /*
+    *
+    * REGEX E PATTERN GCR.
+    *
+    * */
+
+    private static final String NOME_CARTELLA_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z]{1,32}$";
+    private static final Pattern NOME_CARTELLA_PATTERN = Pattern.compile(NOME_CARTELLA_REGEX);
+
     public static boolean isEmailValid(String email) {
         if(email == null)
             return false;
@@ -43,6 +52,13 @@ public class Validator {
             return false;
 
         return PASSWORD_PATTERN.matcher(password).matches();
+    }
+
+    public static boolean isFolderNameValid(String nomeCartella) {
+        if(nomeCartella == null)
+            return false;
+
+        return NOME_CARTELLA_PATTERN.matcher(nomeCartella).matches();
     }
 
 }
