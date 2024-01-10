@@ -19,6 +19,10 @@ public class Validator {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
     private static final String NOME_UTENTE_REGEX = "^[a-zA-Z]{1,32}$";
     private static final Pattern NOME_UTENTE_PATTERN = Pattern.compile(NOME_UTENTE_REGEX);
+    private static final String NOME_PROPRIETA_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final Pattern NOME_PROPRIETA_PATTERN = Pattern.compile(NOME_PROPRIETA_REGEX);
+    private static final String VALORE_PROPRIETA_REGEX = "^[a-zA-Z]{1,64}$";
+    private static final Pattern VALORE_PROPRIETA_PATTERN = Pattern.compile(VALORE_PROPRIETA_REGEX);
 
     /*
     *
@@ -61,4 +65,17 @@ public class Validator {
         return NOME_CARTELLA_PATTERN.matcher(nomeCartella).matches();
     }
 
+    public static boolean isPropertyNameValid(String nomeProprieta) {
+        if(nomeProprieta == null)
+            return false;
+
+        return NOME_PROPRIETA_PATTERN.matcher(nomeProprieta).matches();
+    }
+
+    public static boolean isPropertyValueValid(String valoreProprieta) {
+        if(valoreProprieta == null)
+            return false;
+
+        return VALORE_PROPRIETA_PATTERN.matcher(valoreProprieta).matches();
+    }
 }
