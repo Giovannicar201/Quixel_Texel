@@ -7,7 +7,7 @@ import QuixelTexel.IS.Exception.GMP.GMP.InvalidMapNameException;
 import QuixelTexel.IS.Exception.GMP.GMP.InvalidMapWidthException;
 
 public interface MappaService {
-    String creaMappa(String email, String nome, String lunghezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException, InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException;
+    String creaMappa(String email, String nome, String lunghezza, String larghezza) throws InvalidMapNameException, InvalidMapWidthException, InvalidMapHeightException;
 
     MappaEntity get(String email);
 }
