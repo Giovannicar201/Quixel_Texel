@@ -12,12 +12,9 @@
   <ul>
 
     <li><a href="griglia">Mappa</a></li>
-    <li><a href="entità">Entità</a></li>
-    <li><a href="eventi">Eventi</a></li>
-    <li><a href="pixelArt">Pixel Art</a></li>
-    <li><a href="#">Help</a></li>
     <li th:if="${session.email == null}"><a href="auth">Sign-up & Log-in</a></li>
     <li th:if="${session.email != null}"><a href="auth">Log-out</a></li>
+
   </ul>
 
   <script th:src="@{/js/topmenu.js}"></script>
