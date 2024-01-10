@@ -19,4 +19,12 @@ public class HTMLMapping {
 
     }
 
+    @GetMapping("/mappa")
+
+    public String mappa(){
+
+        return "mappa";
+
+    }
+
 }

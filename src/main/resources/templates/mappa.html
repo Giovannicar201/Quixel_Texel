@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
+
+</head>
+
+<div th:replace="fragments :: topmenu"></div>
+
+<body>
+
+<div class = "break">
+
+    <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+
+        <button id="crea" class = "tools breakBar" onclick="creaDivMappa()">
+            <img src="https://i.postimg.cc/d1jQtQT7/Tavola-disegno-1-3.png">
+        </button>
+
+        <button id="cartelle" class = "tools breakBar" onclick="creaDivCartellaMappa()">
+            <img src="https://i.postimg.cc/BnB9xWyG/Tavola-disegno-1-4.png">
+        </button>
+
+        <button id="draw" class = "tools breakBar" onclick="creaDivMatitaMappa()">
+            <img src="https://i.postimg.cc/BQPjnVVL/Tavola-disegno-1-5.png">
+        </button>
+
+        <button id="rettangolare" class = "tools breakBar" onclick="creaDivStrumentoRettangolareMappa()">
+            <img src="https://i.postimg.cc/sggnzvSj/Tavola-disegno-1-7.png">
+        </button>
+
+        <button id="generative" class = "tools breakBar" onclick="creaStrumentoGenerativa()">
+            <img src="https://i.postimg.cc/KzPFKBhT/Tavola-disegno-1-9.png">
+        </button>
+
+    </div>
+
+    <div class="divBreak" id="info"></div>
+
+</div>
+
+<div id = "griglia" class="griglia" style="position: relative;"></div>
+
+<div id = "result" hidden="hidden"></div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script th:src = "@{/js/GMP/GMP/GMP.js}"></script>
+<script th:src = "@{/js/GMP/GCR/GCR.js}"></script>
+<script th:src = "@{/js/GEN/GIM/GIM.js}"></script>
+<script th:src = "@{/js/GEN/GEN.js}"></script>
+<script th:src = "@{/js/GMP/GST/GST.js}"></script>
+
+<script>
+
+    $(window).on('load', function() {
+
+        recuperaMappa();
+
+    });
+
+</script>
+
+</html>

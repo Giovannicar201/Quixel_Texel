@@ -166,3 +166,127 @@ label{
     align-items: center;
 
 }
+
+.popStyle{
+
+    width: 2px;
+    height: 2px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.square{
+
+    width: 32px;
+    height: 32px;
+    background-color: #3F3F3F;
+    border: solid 1px #B7B7B7;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.squareColor{
+
+    border: none;
+    height: 64px;
+    width: 64px;
+    margin-left: 50%;
+    margin-top: 4px;
+
+}
+
+.squareColor.selected{
+
+    border: solid 1px #516f96;
+
+}
+
+.squarePixelArt{
+
+    width: 32px;
+    height: 32px;
+    background-color: #3F3F3F;;
+    border: solid 0.5px #B7B7B7;;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.squareTools{
+
+    width: 32px;
+    height: 32px;
+    box-sizing: content-box;
+    display: unset;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cellaTile{
+
+    max-width: 32px;
+    border: 0px;
+
+}
+
+div#devtools{
+
+    margin-left: 20px;
+
+}
+
+.cella{
+
+    border: 0px;
+    max-width: 32px;
+
+}
+
+.cella:hover {
+
+    filter: brightness(1.5);
+
+}
+
+div.coordinate {
+
+    display: unset;
+    top: 15%;
+    left: 0%;
+    position: fixed;
+    font-size: 20px;
+
+}
+
+.colori{
+
+    display: grid;
+    grid-template-columns: repeat(3 , 32px);
+    padding: 0px;
+    width: fit-content;
+    block-size: fit-content;
+
+}
+
+#ordinata{
+
+    display: flex;
+    margin-left: 8px;
+
+}
+
+#ascissa{
+
+    display: flex;
+    margin-left: 8px;
+
+}
