@@ -156,11 +156,17 @@ function ottieniContenutoCartella(){
 
                 $(".imgEntity").click(function (){
 
-                    $(".imgEntity").removeClass("selected")
+                    $(".imgEntity").removeClass("selected");
+
+                    $(".imgEntity").css("border", "none");
+
+                    $(".imgEntity").css("filter", "none");
 
                     $(this).addClass("selected");
 
                     $(this).css("border", "solid 1px #516f96");
+
+                    $(this).css("filter", "contrast(0.5)");
 
                 });
 
