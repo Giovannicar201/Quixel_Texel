@@ -56,7 +56,7 @@ public class MappaManager {
      */
     private void generaLog() {
 
-        String filePath = "src\\main\\java\\unisa\\it\\is\\project\\fia\\project\\Logs\\mappaLog.txt";
+        String filePath = "src\\main\\java\\QuixelTexel\\FIA\\Logs\\mappaLog.txt";
 
         try {
 

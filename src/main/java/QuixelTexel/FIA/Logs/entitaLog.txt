@@ -1,0 +1,5 @@
+@log
+
+@entita @id::2 @numeroTotaleSullaMappa::18 @numeroTotaleSullaMappaPercentuale::23.68 @numeroTotaleSullaSelezione::12 @daPiazzareSullaSelezione::12 @LOD::HIGH_LOD
+@entita @id::7 @numeroTotaleSullaMappa::23 @numeroTotaleSullaMappaPercentuale::30.26 @numeroTotaleSullaSelezione::15 @daPiazzareSullaSelezione::15 @LOD::MEDIUM_LOD
+@entita @id::3 @numeroTotaleSullaMappa::35 @numeroTotaleSullaMappaPercentuale::46.05 @numeroTotaleSullaSelezione::22 @daPiazzareSullaSelezione::22 @LOD::LOW_LOD

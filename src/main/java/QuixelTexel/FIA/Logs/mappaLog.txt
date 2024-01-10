@@ -1,0 +1,3 @@
+@log
+
+@primoPuntoDiSelezione::(0,0) @secondPuntoDiSelezione::(6,6) @totaleEntitaPiazzate::76 @larghezzaSelezione::7 @altezzaSelezione::7 @totaleCelleAreaSelezione::49

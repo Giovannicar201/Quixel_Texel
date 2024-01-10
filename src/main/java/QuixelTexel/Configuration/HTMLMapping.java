@@ -34,5 +34,4 @@ public class HTMLMapping {
         return "entita";
 
     }
-
 }
