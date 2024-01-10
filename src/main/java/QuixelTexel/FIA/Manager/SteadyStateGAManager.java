@@ -78,8 +78,6 @@ public class SteadyStateGAManager {
         individuo.piazzaEntitaMEDIUM_LOD(entitaMEDIUM_LOD);
         individuo.piazzaEntitaLOW_LOD(entitaLOW_LOD);
 
-        System.out.println(individuo);
-
         return individuo;
     }
 
@@ -121,8 +119,6 @@ public class SteadyStateGAManager {
                     individuoMigliore = individuo;
         }
 
-        System.out.println(individuoMigliore);
-
         return individuoMigliore;
     }
 
@@ -163,9 +159,6 @@ public class SteadyStateGAManager {
         int[][] primoGenitore = genitori.get(0).getAreaSelezionata();
         int[][] secondoGenitore = genitori.get(1).getAreaSelezionata();
 
-        System.out.println(genitori.get(0));
-        System.out.println(genitori.get(1));
-
         int altezza = primoGenitore.length;
         int larghezza = primoGenitore[0].length;
 
@@ -183,7 +176,6 @@ public class SteadyStateGAManager {
             for (int id : riga)
                 secondaMappaDelleOccorrenze.put(id, secondaMappaDelleOccorrenze.getOrDefault(id, 0) + 1);
 
-        System.out.println(primaMappaDelleOccorrenze);
 
         for(int riga = 0; riga < altezza; riga++) {
             for(int colonna = 0; colonna < larghezza; colonna++) {

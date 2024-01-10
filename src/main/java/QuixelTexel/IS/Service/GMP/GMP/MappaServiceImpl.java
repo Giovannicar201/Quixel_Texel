@@ -68,8 +68,6 @@ public class MappaServiceImpl implements MappaService {
 
         mappaJSON.put("mappa",entita);
 
-        System.out.println(mappaJSON);
-
         mappaRepository.save(mappaEntity);
 
         return mappaJSON.toString();
