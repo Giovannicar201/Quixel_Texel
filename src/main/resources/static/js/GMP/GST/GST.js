@@ -137,13 +137,13 @@ function creaDivMatitaMappa(){
                 '   </div>' +
                 '<div class="actionDiv">'+
                 '                  <label for="nome">Nome cartella:</label>' +
-                '                  <input type="text" id="nome" class="inputForm">' +
+                '                  <input type="text" id="nome" class="inputForm" style="width: 362px;">' +
                 '              </div>' +
-                '<div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 340px; margin-left: 7px;" id="show">' +
+                '<div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; margin-left: 7px;" id="show">' +
                 '           ' +
                 '       </div>'+
                 '<div class="actionDiv">' +
-                '                  <button class="bottone" onclick="ottieniContenutoCartella()">Visualizza entità</button>' +
+                '                  <button class="bottone" onclick="ottieniContenutoCartella()" style="width: 366px;">Visualizza entità</button>' +
                 '</div>' +
                 '</div>' +
                 '<div class="breakDivAction">' +

@@ -26,7 +26,7 @@ function creaDivGestoreEntità(){
 
         visualizzaListaEntità();
         $(div).append('<div class = "titleBar" id="titleBar">'+
-            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
+            '            <img class="iconTitle" src="https://i.postimg.cc/nz23gNTt/ent.png" id="title">' +
             '            <label for="title">Gestore entità</label>'+
             '</div>'+
             ' <div class="breakDivAction">'+

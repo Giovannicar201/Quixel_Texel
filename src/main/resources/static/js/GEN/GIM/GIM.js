@@ -20,8 +20,8 @@ function creaDivImmaginiEntità(){
         }
 
         $(div).append('<div class = "titleBar" id="titleBar">'+
-            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
-            '            <label for="title">Gestore entità</label>'+
+            '            <img class="iconTitle" src="https://i.postimg.cc/HkGsVN4m/img-1.png" id="title">' +
+            '            <label for="title">Gestore Immagini</label>'+
             '</div>'+
             ' <div class="breakDivAction">'+
             '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
