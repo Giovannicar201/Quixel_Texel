@@ -27,4 +27,12 @@ public class HTMLMapping {
 
     }
 
+    @GetMapping("/entita")
+
+    public String entita(){
+
+        return "entita";
+
+    }
+
 }

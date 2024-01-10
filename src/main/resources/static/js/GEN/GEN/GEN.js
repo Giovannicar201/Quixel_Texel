@@ -60,41 +60,6 @@ function creaDivGestoreEntità(){
             '              </div>' +
             '<div id="creazione">' +
             '</div>' +
-            '</div>' +
-            '<div class="breakDivAction">' +
-            '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-            '       Modifica </div>' +
-            '<div class="actionDiv">'+
-            '                  <label>Nome entità:</label>' +
-            '                  <input type="text" class="inputForm" id="nomeIns">' +
-            '              </div>' +
-            '<div class="actionDiv">' +
-            '                  <label>Collisioni:</label>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
-            '                   <button onclick="" class="bottone" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
-            '              </div>' +
-            '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Modifica Entità</button>' +
-            '              </div>' +
-            '</div>' +
-            '<div class="breakDivAction">' +
-            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-            '       Eliminazione </div>' +
-            '<div class="actionDiv">'+
-            '                  <label>Nome entità:</label>' +
-            '                  <input type="text" class="inputForm">' +
-            '              </div>' +
-            '<div class="actionDiv">' +
-            '                  <button class="bottone" onclick="">Elimina Entità</button>' +
-            '              </div>' +
-            '</div>' +
-            '<div class="breakDivAction">' +
-            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-            '       Entità </div>' +
-            '               <div class="actionDiv" id="show1">' +
-            '           </div>' +
-            '       </div>' +
-            '           ' +
             '</div>');
     } else {
 

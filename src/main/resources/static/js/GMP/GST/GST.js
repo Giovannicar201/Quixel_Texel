@@ -20,7 +20,7 @@ function creaStrumentoGenerativa(){
 
             $(divStrumentiMappa).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/KzPFKBhT/Tavola-disegno-1-9.png" id="title">' +
-                '            <label for="title">Strumento di scattering</label>'+
+                '            <label for="title">Strumento IA</label>'+
                 '</div>' +
                 '<div class="breakDivAction">' +
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +

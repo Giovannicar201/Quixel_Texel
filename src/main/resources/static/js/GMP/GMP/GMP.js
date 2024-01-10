@@ -42,55 +42,6 @@ function creaDivMappa(){
                 '                  <button class="bottone" onclick="creaGriglia()">Crea Mappa</button>' +
                 '              </div>' +
                 '</div>' +
-                '<div class="breakDivAction">'+
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-                '       Esportazione' +
-                '   </div>' +
-                '<div class="actionDiv">'+
-                '                  <label for="formato">Formato:</label>' +
-                '                  <div style="display: flex; margin-top: 8px;">' +
-                '                       <button onclick="bottoneDownload(\'png\')" class="bottone download png" style="width: 114px; background-color: #1A1A1A;">PNG</button>' +
-                '                       <button onclick="bottoneDownload(\'jpg\')" class="bottone download jpg" style="width: 114px; margin-left: 5px; margin-right: 5px; background-color: #1A1A1A;">JPG</button>' +
-                '                       <button onclick="bottoneDownload(\'json\')" class="bottone download json" style="width: 114px; background-color: #1A1A1A;">JSON</button>' +
-                '                  </div>' +
-                '              </div>' +
-                '<div class="actionDiv">' +
-                '                  <button class="bottone" onclick="downloadFormato()">Salva Mappa</button>' +
-                '              </div>' +
-                '</div>' +
-                '<div class="breakDivAction">' +
-                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
-                '       Statistiche' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "LargezzaMappa">Larghezza Mappa - </label>' +
-                '       <div id="LarghezzaMappa"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "AltezzaMappa">Altezza Mappa - </label>' +
-                '       <div id="AltezzaMappa"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "copertura">Entità Piazzate - </label>' +
-                '       <div id="copertura"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "coperturaPercentuale">Entità Piazzate Percentuale - </label>' +
-                '       <div id="coperturaPercentuale"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "celleVuote">Celle vuote - </label>' +
-                '       <div id="celleVuote"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "celleVuotePercentuale">Celle vuote percentuale - </label>' +
-                '       <div id="celleVuotePercentuale"></div>' +
-                '   </div>' +
-                '   <div class="actionDiv">' +
-                '       <label for= "coperturaEventi">Eventi - </label>' +
-                '       <div id="coperturaEventi"></div>' +
-                '   </div>' +
-                '</div>' +
                 '<div class="breakDivAction">' +
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
                 '       Cursore' +
@@ -159,7 +110,7 @@ function creaMappa(altezza, larghezza, nome){
 
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-            alert("Creazione avvenuta con successo!");
+
 
         }
 
