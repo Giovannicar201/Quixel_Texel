@@ -1,4 +1,4 @@
-package QuixelTexel.IS.Service.GMP;
+package QuixelTexel.IS.Service.GMP.GCR;
 
 import QuixelTexel.IS.Utility.Validator;
 import jakarta.transaction.Transactional;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
-import QuixelTexel.IS.Exception.GMP.InvalidFolderNameException;
-import QuixelTexel.IS.Exception.GMP.NotUniqueFolderException;
+import QuixelTexel.IS.Exception.GMP.GCR.InvalidFolderNameException;
+import QuixelTexel.IS.Exception.GMP.GCR.NotUniqueFolderException;
 import QuixelTexel.IS.Repository.GMP.GCR.CartellaRepository;
 import QuixelTexel.IS.Service.GAC.UtenteService;
 

@@ -1,10 +1,10 @@
-package QuixelTexel.IS.Control.GMP;
+package QuixelTexel.IS.Control.GMP.GCR;
 
-import QuixelTexel.IS.Exception.GMP.GCRException;
-import QuixelTexel.IS.Exception.GMP.InvalidFolderNameException;
-import QuixelTexel.IS.Exception.GMP.NotUniqueFolderException;
+
+import QuixelTexel.IS.Exception.GMP.GCR.*;
+import QuixelTexel.IS.Exception.GMP.GCR.GCRException;
 import QuixelTexel.IS.Exception.Session.MissingSessionEmailException;
-import QuixelTexel.IS.Service.GMP.CartellaService;
+import QuixelTexel.IS.Service.GMP.GCR.CartellaService;
 import QuixelTexel.IS.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import unisa.it.is.project.Exception.GMP.*;
-import unisa.it.is.project.Exception.Session.*;
-
 import java.io.IOException;
 
 

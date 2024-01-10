@@ -9,14 +9,13 @@ import QuixelTexel.IS.Exception.GEN.GEN.*;
 import QuixelTexel.IS.Repository.GEN.GEN.EntitaRepository;
 import QuixelTexel.IS.Service.GAC.UtenteService;
 import QuixelTexel.IS.Service.GEN.GIM.ImmagineService;
-import QuixelTexel.IS.Service.GMP.CartellaService;
+import QuixelTexel.IS.Service.GMP.GCR.CartellaService;
 import QuixelTexel.IS.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;

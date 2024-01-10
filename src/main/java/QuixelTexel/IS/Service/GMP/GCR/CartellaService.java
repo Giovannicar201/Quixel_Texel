@@ -1,9 +1,9 @@
-package QuixelTexel.IS.Service.GMP;
+package QuixelTexel.IS.Service.GMP.GCR;
 
 
 import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
-import QuixelTexel.IS.Exception.GMP.InvalidFolderNameException;
-import QuixelTexel.IS.Exception.GMP.NotUniqueFolderException;
+import QuixelTexel.IS.Exception.GMP.GCR.InvalidFolderNameException;
+import QuixelTexel.IS.Exception.GMP.GCR.NotUniqueFolderException;
 
 public interface CartellaService {
     void creaCartella(String nome, String email) throws InvalidFolderNameException, NotUniqueFolderException;
