@@ -1,6 +1,5 @@
 package QuixelTexel.IS.Control.GAC;
 
-import QuixelTexel.Exception.GAC.*;
 import QuixelTexel.IS.Exception.Session.MissingSessionEmailException;
 import QuixelTexel.IS.Exception.GAC.*;
 import QuixelTexel.IS.Utility.SessionManager;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import unisa.it.is.project.Exception.GAC.*;
 import QuixelTexel.IS.Service.GAC.UtenteService;
 
 import java.io.IOException;

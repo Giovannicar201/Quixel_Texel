@@ -1,10 +1,8 @@
 package QuixelTexel.IS.Service.GAC;
 
-import QuixelTexel.Exception.GAC.*;
 import QuixelTexel.IS.Exception.GAC.*;
 import org.json.simple.parser.ParseException;
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
-import unisa.it.is.project.Exception.GAC.*;
 import java.security.NoSuchAlgorithmException;
 
 public interface UtenteService {
