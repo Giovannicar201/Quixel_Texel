@@ -4,6 +4,8 @@ Quixel Texel intende migliorare il flusso di lavoro dello sviluppo indie attrave
 
 # Modulo di IA
 Quixel Texel offre la possibilità di sfruttare un modulo di IA in grado di generare porzioni di tile map in maniera automatica. Tale modulo è contenuto all'interno del package FIA.
+All'interno di tale package è inoltre possibile trovare una serie di documenti utili alla comprensione e all'utilizzo del modulo di IA. 
+Tali documenti di trovando sotto il package Resources.
 
 # Installazione
 
@@ -31,3 +33,4 @@ nome = tilemap
 Per fare questo è possibile seguire la serie di passi riportati alla seguente pagina: https://www.jetbrains.com/help/idea/schemas.html
 
 A questo punto basterà selezionare lo schema creato ed avviare il progetto.
+
