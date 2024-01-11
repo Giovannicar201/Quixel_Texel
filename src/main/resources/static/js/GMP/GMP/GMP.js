@@ -32,11 +32,11 @@ function creaDivMappa(){
                 '              </div>' +
                 '<div class="actionDiv">'+
                 '                  <label for="larghezza">Larghezza:</label>' +
-                '                  <input type="number" id="larghezza" class="inputForm" required>' +
+                '                  <input type="number" id="larghezza" class="inputForm" max="32" required>' +
                 '              </div>' +
                 '<div class="actionDiv">' +
                 '                  <label for="altezza">Altezza:</label>' +
-                '                  <input type="number" id="altezza" class="inputForm" required>' +
+                '                  <input type="number" id="altezza" class="inputForm" max="32" required>' +
                 '              </div>' +
                 '<div class="actionDiv">' +
                 '                  <button class="bottone" onclick="creaGriglia()">Crea Mappa</button>' +
