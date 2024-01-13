@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +25,12 @@ public class EntitaEntity {
     private int id;
     private String nome;
     private String collisione;
+
+    @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
+    private List<ProprietaEntity> proprietaEntityList;
+
+    @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
+    private List<CoordinateEntity> coordinateEntityList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")

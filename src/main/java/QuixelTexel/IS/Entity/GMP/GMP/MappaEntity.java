@@ -1,5 +1,6 @@
 package QuixelTexel.IS.Entity.GMP.GMP;
 
+import QuixelTexel.IS.Entity.GEV.EventoEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,9 @@ public class MappaEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email",referencedColumnName = "email")
     private UtenteEntity utenteEntity;
+
+    @OneToMany(mappedBy = "mappaEntity",cascade = CascadeType.REMOVE)
+    private List<EventoEntity> eventoEntityList;
 
     @OneToMany(mappedBy = "mappaEntity",cascade = CascadeType.REMOVE)
     private List<EntitaEntity> entitaEntityList;
