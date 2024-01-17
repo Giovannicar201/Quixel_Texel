@@ -34,4 +34,12 @@ public class HTMLMapping {
         return "entita";
 
     }
+
+    @GetMapping("/gestorePixelArt")
+
+    public String gestorePixelArt(){
+
+        return "gestorePixelArt";
+
+    }
 }

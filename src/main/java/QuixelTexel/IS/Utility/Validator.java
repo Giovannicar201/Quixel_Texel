@@ -18,31 +18,31 @@ public class Validator {
     private static final Pattern HOTMAIL_PATTERN = Pattern.compile(HOTMAIL_REGEX);
     private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
-    private static final String NOME_UTENTE_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final String NOME_UTENTE_REGEX = "^[a-zA-Z\\s]{1,32}$";
     private static final Pattern NOME_UTENTE_PATTERN = Pattern.compile(NOME_UTENTE_REGEX);
 
     /*
-    *
-    * REGEX E PATTERN GCR.
-    *
-    * */
+     *
+     * REGEX E PATTERN GCR.
+     *
+     * */
 
-    private static final String NOME_CARTELLA_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z]{1,32}$";
+    private static final String NOME_CARTELLA_REGEX = "^(?=.*[a-zA-Z\\s])[a-zA-Z\\s]{1,32}$";
     private static final Pattern NOME_CARTELLA_PATTERN = Pattern.compile(NOME_CARTELLA_REGEX);
 
     /*
-    *
-    * REGEX E PATTERN GEN.
-    *
-    * */
+     *
+     * REGEX E PATTERN GEN.
+     *
+     * */
 
-    private static final String NOME_ENTITA_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final String NOME_ENTITA_REGEX = "^[a-zA-Z\\s]{1,32}$";
     private static final Pattern NOME_ENTITA_PATTERN = Pattern.compile(NOME_ENTITA_REGEX);
     private static final String COLLISIONE_REGEX = "\\b(?:si|no)\\b";
     private static final Pattern COLLISIONE_PATTERN = Pattern.compile(COLLISIONE_REGEX);
-    private static final String NOME_PROPRIETA_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final String NOME_PROPRIETA_REGEX = "^[a-zA-Z\\s]{1,32}$";
     private static final Pattern NOME_PROPRIETA_PATTERN = Pattern.compile(NOME_PROPRIETA_REGEX);
-    private static final String VALORE_PROPRIETA_REGEX = "^[a-zA-Z]{1,64}$";
+    private static final String VALORE_PROPRIETA_REGEX = "^[a-zA-Z\\s]{1,64}$";
     private static final Pattern VALORE_PROPRIETA_PATTERN = Pattern.compile(VALORE_PROPRIETA_REGEX);
 
     /*
@@ -51,10 +51,39 @@ public class Validator {
      *
      * */
 
-    private static final String NOME_MAPPA_REGEX = "^[a-zA-Z]{1,32}$";
+    private static final String NOME_MAPPA_REGEX = "^[a-zA-Z\\s]{1,32}$";
     private static final Pattern NOME_MAPPA_PATTERN = Pattern.compile(NOME_MAPPA_REGEX);
 
+    /*
+     *
+     * REGEX E PATTERN GPL.
+     *
+     * */
 
+    private static final String NOME_PALETTE_REGEX = "^(?=.*[a-zA-Z\\s])[a-zA-Z\\s]{1,32}$";
+    private static final Pattern NOME_PALETTE_PATTERN = Pattern.compile(NOME_PALETTE_REGEX);
+
+    /*
+     *
+     * REGEX E PATTERN GPA.
+     *
+     * */
+
+    private static final String NOME_PIXEL_ART_REGEX = "^[a-zA-Z\\s]{1,32}$";
+    private static final Pattern NOME_PIXEL_ART_PATTERN = Pattern.compile(NOME_PIXEL_ART_REGEX);
+
+    /*
+     *
+     * REGEX E PATTERN GEV.
+     *
+     * */
+
+    private static final String NOME_EVENTO_REGEX = "^[a-zA-Z\\s]{1,32}$";
+    private static final Pattern NOME_EVENTO_PATTERN = Pattern.compile(NOME_EVENTO_REGEX);
+    private static final String VALORE_ISTRUZIONE_TESTO_REGEX = "^[a-zA-Z\\s]{1,32}$";
+    private static final Pattern VALORE_ISTRUZIONE_TESTO_PATTERN = Pattern.compile(VALORE_ISTRUZIONE_TESTO_REGEX);
+    private static final String VALORE_ISTRUZIONE_DIALOGO_REGEX = "^[a-zA-Z\\s]{1,32}$";
+    private static final Pattern VALORE_ISTRUZIONE_DIALOGO_PATTERN = Pattern.compile(VALORE_ISTRUZIONE_DIALOGO_REGEX);
 
     public static boolean isEmailValid(String email) {
         if(email == null)
@@ -147,5 +176,74 @@ public class Validator {
             return  false;
 
         return Integer.parseInt(colonna) >= 0 && Integer.parseInt(colonna) <= (larghezza - 1);
+    }
+
+    public static boolean isPaletteNameValid(String nomePalette) {
+        if(nomePalette == null)
+            return false;
+
+        return NOME_PALETTE_PATTERN.matcher(nomePalette).matches();
+    }
+
+    public static boolean isNumberOfColorValid(int numeroDiColori) {
+        return numeroDiColori >= 1 && numeroDiColori <= 8;
+    }
+
+    public static boolean isPixelArtNameValid(String nomePixelArt) {
+        if(nomePixelArt == null)
+            return false;
+
+        return NOME_PIXEL_ART_PATTERN.matcher(nomePixelArt).matches();
+    }
+
+    public static boolean isFillPercentageValid(float percentualeRiempimento) {
+        return percentualeRiempimento >= 0 && percentualeRiempimento <= 100 ;
+    }
+
+    public static boolean isNumberOfPriorityValid(int numeroDiPriorita, int area) {
+        return numeroDiPriorita <= area;
+    }
+
+    public static boolean isPriorityPercentageSumValid(float sommaPriorita) {
+        return sommaPriorita == 100 ;
+    }
+
+    public static boolean isEventNameValid(String nomeEvento) {
+        if(nomeEvento == null)
+            return false;
+
+        return NOME_EVENTO_PATTERN.matcher(nomeEvento).matches();
+    }
+
+    public static boolean isPositionValid(String riga, String colonna, long altezza, long larghezza) {
+        if(riga == null)
+            return  false;
+
+        if(colonna == null)
+            return false;
+
+        return Integer.parseInt(colonna) >= 0 && Integer.parseInt(colonna) <= (larghezza - 1) && Integer.parseInt(riga) >= 0 && Integer.parseInt(riga) <= (altezza - 1);
+    }
+
+    public static boolean isNumberOfInstructionValid(int numeroDiIstruzioni) {
+        return numeroDiIstruzioni > 0 && numeroDiIstruzioni <= 16;
+    }
+
+    public static boolean isCycleValueValid(int iterazioni) {
+        return iterazioni >= 0 && iterazioni <= 4;
+    }
+
+    public static boolean isDialogValueValid(String valore) {
+        if(valore == null)
+            return false;
+
+        return VALORE_ISTRUZIONE_DIALOGO_PATTERN.matcher(valore).matches();
+    }
+
+    public static boolean isTextValueValid(String valore) {
+        if(valore == null)
+            return false;
+
+        return VALORE_ISTRUZIONE_TESTO_PATTERN.matcher(valore).matches();
     }
 }
