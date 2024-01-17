@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
+    <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
+
+</head>
+
+<div th:replace="fragments :: topmenu"></div>
+
+<body>
+
+<div class = "break">
+
+    <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+
+        <button id="crea" class = "tools breakBar" onclick="creaDivPixelArt()">
+            <img src="https://i.postimg.cc/d1jQtQT7/Tavola-disegno-1-3.png">
+        </button>
+
+        <button id="draw" class = "tools breakBar" onclick="creaMatitaPA()">
+            <img src="https://i.postimg.cc/BQPjnVVL/Tavola-disegno-1-5.png">
+        </button>
+
+        <button id="rubber" class = "tools breakBar" onclick="creaStrumentoGommaPA()">
+            <img src="https://i.postimg.cc/d0NsYxf3/Tavola-disegno-1-6.png">
+        </button>
+
+        <button id="preview" class = "tools breakBar" onclick="creaPreviewPA()">
+            <img src="https://i.postimg.cc/Gprst7tc/Tavola-disegno-1.png">
+        </button>
+
+        <button id="generatore" class = "tools breakBar" onclick="creaStrumentoGenerazioneCasualePA()">
+            <img src="https://i.postimg.cc/vBtg5W1W/Tavola-disegno-1-1.png">
+        </button>
+
+    </div>
+
+    <div class="divBreak" id="info"></div>
+
+</div>
+
+<div id = "result"></div>
+<div id = "griglia" class="griglia" style="position: relative;"></div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script th:src = "@{/js/GMP/GCR/GCR.js}"></script>
+<script th:src = "@{/js/GMP/GMP.js}"></script>
+<script th:src = "@{/js/GMP/GPA/GPA.js}"></script>
+<script th:src = "@{/js/GEN/GIM/GIM.js}"></script>
+<script th:src = "@{/js/GEN/GEN.js}"></script>
+<script th:src = "@{/js/GMP/GST/GST.js}"></script>
+
+<script>
+
+    $(window).on('load', function() {
+
+        recuperaPA();
+
+    });
+
+</script>
+
+</html>
