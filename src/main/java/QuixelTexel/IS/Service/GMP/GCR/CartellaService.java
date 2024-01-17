@@ -1,5 +1,6 @@
 package QuixelTexel.IS.Service.GMP.GCR;
 
+import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
 import QuixelTexel.IS.Exception.GMP.GCR.InvalidFolderNameException;
 import QuixelTexel.IS.Exception.GMP.GCR.NotUniqueFolderException;
 
