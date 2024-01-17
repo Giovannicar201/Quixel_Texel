@@ -1,6 +1,5 @@
 package QuixelTexel.IS.Control.GMP.GCR;
 
-
 import QuixelTexel.IS.Exception.GMP.GCR.*;
 import QuixelTexel.IS.Exception.GMP.GCR.GCRException;
 import QuixelTexel.IS.Exception.Session.MissingSessionEmailException;
@@ -17,15 +16,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.IOException;
 
-
 @Controller
 public class CartellaControl {
 
     @Autowired
-    public CartellaService cartellaService;
+    private CartellaService cartellaService;
 
+    /**
+     * Gestisce la richiesta di creazione di una nuova cartella.
+     *
+     * @param nomeCartella Nome della nuova cartella da creare.
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GCRException Eccezione generica del gestore delle cartelle (GCR).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GCRException
+     */
     @RequestMapping(value = "/gestoreCartelle/creaCartella", method = RequestMethod.POST)
-
     public void creaCartella(@RequestBody String nomeCartella, HttpServletRequest request, HttpServletResponse response) throws GCRException {
 
         try {
@@ -61,9 +69,19 @@ public class CartellaControl {
         }
     }
 
+    /**
+     * Gestisce la richiesta di visualizzazione della lista di cartelle associate a un utente.
+     *
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @return Una stringa JSON contenente la lista di nomi delle cartelle associate all'utente.
+     * @throws GCRException Eccezione generica del gestore delle cartelle (GCR).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GCRException
+     */
     @RequestMapping(value = "/gestoreCartelle/visualizzaListaCartelle", method = RequestMethod.GET)
     @ResponseBody
-
     public String visualizzaListaCartelle(HttpServletRequest request, HttpServletResponse response) throws GCRException {
 
         String nomiCartelle = new JSONObject().toString();

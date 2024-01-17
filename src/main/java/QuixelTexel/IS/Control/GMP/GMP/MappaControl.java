@@ -22,10 +22,20 @@ import java.io.IOException;
 public class MappaControl {
 
     @Autowired
-    public MappaService mappaService;
+    private MappaService mappaService;
 
+    /**
+     * Gestisce la richiesta di creazione di una nuova mappa.
+     *
+     * @param mappa Stringa JSON contenente le informazioni per la creazione della mappa.
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GMPException Eccezione generica del gestore della mappa (GMP).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GMPException
+     */
     @RequestMapping(value = "/gestoreMappa/creaMappa", method = RequestMethod.POST)
-
     public void creaMappa(@RequestBody String mappa, HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         JSONParser parser = new JSONParser();
@@ -40,7 +50,7 @@ public class MappaControl {
             String altezza = (String) mappaJSON.get("altezza");
             String larghezza = (String) mappaJSON.get("larghezza");
 
-            String mappaVuota = mappaService.creaMappa(email,nome,altezza,larghezza);
+            String mappaVuota = mappaService.crea(email,nome,altezza,larghezza);
 
             SessionManager.setMappa(request,mappaVuota);
 
@@ -87,9 +97,69 @@ public class MappaControl {
         }
     }
 
+    /**
+     * Gestisce la richiesta di visualizzazione delle statistiche di una mappa.
+     *
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @return Una stringa JSON rappresentante le statistiche della mappa.
+     * @throws GMPException Eccezione generica del gestore della mappa (GMP).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GMPException
+     */
+    @RequestMapping(value = "/gestoreMappa/visualizzaStatisticheMappa", method = RequestMethod.POST)
+    @ResponseBody
+    public String visualizzaStatisticheMappa(HttpServletRequest request, HttpServletResponse response) throws GMPException {
+
+        String statistiche = new JSONObject().toString();
+
+        try {
+
+            SessionManager.getEmail(request);
+
+            String mappa = SessionManager.getMappa(request);
+
+            statistiche = mappaService.visualizzaStatisticheMappa(mappa);
+
+        } catch (MissingSessionMapException e) {
+
+            try {
+                response.sendError(302, "MSME");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - NESSUNA MAPPA IN SESSIONE.");
+            }
+
+        } catch (MissingSessionEmailException e) {
+
+            try {
+                response.sendError(302, "MSEE");
+            } catch (IOException ex) {
+                throw new GMPException("ERRORE - NESSUN UTENTE IN SESSIONE.");
+            }
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        response.setContentType("text/plain");
+
+        return statistiche;
+    }
+
+    /**
+     * Gestisce la richiesta di recupero dei dati di una mappa.
+     *
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @return Una stringa JSON rappresentante i dati della mappa.
+     * @throws GMPException Eccezione generica del gestore della mappa (GMP).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GMPException
+     */
     @RequestMapping(value = "/gestoreMappa/recuperaMappa", method = RequestMethod.POST)
     @ResponseBody
-
     public String caricaMappa(HttpServletRequest request, HttpServletResponse response) throws GMPException {
 
         String mappa = new JSONObject().toString();
