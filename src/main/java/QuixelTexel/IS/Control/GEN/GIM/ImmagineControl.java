@@ -1,5 +1,6 @@
 package QuixelTexel.IS.Control.GEN.GIM;
 
+import QuixelTexel.IS.Exception.GEN.GIM.GIMException;
 import QuixelTexel.IS.Exception.GEN.GIM.InvalidFileSizeException;
 import QuixelTexel.IS.Exception.GEN.GIM.NotUniqueImageException;
 import QuixelTexel.IS.Exception.Session.MissingSessionEmailException;
@@ -15,20 +16,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import QuixelTexel.IS.Exception.GEN.GIM.GIMException;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 @Controller
 public class ImmagineControl {
-
-
+    
     @Autowired
-    public ImmagineService immagineService;
+    private ImmagineService immagineService;
 
+    /**
+     * Gestisce la richiesta di caricamento di un'immagine da parte dell'utente autenticato.
+     *
+     * @param immagine Oggetto MultipartFile che rappresenta il file dell'immagine da caricare.
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GIMException Eccezione generica del gestore delle immagini (GIM).
+     * @see MultipartFile
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GIMException
+     */
     @RequestMapping(value = "/gestoreImmagini/caricaImmagine", method = RequestMethod.POST)
-
     public void caricaImmagine(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response)
             throws GIMException {
 
@@ -72,45 +82,20 @@ public class ImmagineControl {
         }
     }
 
-    @RequestMapping(value = "/gestoreImmagini/integraImmagine", method = RequestMethod.POST)
-
-    public void integraPixelArt(@RequestPart("file") MultipartFile immagine, HttpServletRequest request, HttpServletResponse response)
-            throws GIMException {
-
-        try {
-
-            String email = SessionManager.getEmail(request);
-
-            immagineService.caricaImmagine(immagine, email);
-
-        } catch (IOException | SQLException e) {
-
-            throw new GIMException("ERRORE - CARICA IMMAGINE IOEXCEPTION || SQLEXCEPTION.");
-
-        } catch (MissingSessionEmailException e) {
-
-            try {
-                response.sendError(302, "MSEE");
-            } catch (IOException ex) {
-                throw new GIMException("ERRORE - CARICA IMMAGINE IOEXCEPTION.");
-            }
-
-        } catch (InvalidFileSizeException e) {
-
-            try {
-                response.sendError(500, "IFSE");
-            } catch (IOException ex) {
-                throw new GIMException("ERRORE - DIMENSIONE DELL'IMMAGINE NON VALIDA.");
-            }
-
-        }
-    }
-
+    /**
+     * Gestisce la richiesta di visualizzazione della lista delle immagini associate all'utente autenticato.
+     *
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @return Una stringa JSON contenente le informazioni sulla lista delle immagini dell'utente.
+     * @throws GIMException Eccezione generica del gestore delle immagini (GIM).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GIMException
+     */
     @RequestMapping(value = "/gestoreImmagini/visualizzaListaImmagini", method = RequestMethod.GET)
     @ResponseBody
-
-    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response)
-            throws GIMException {
+    public String visualizzaListaImmagini(HttpServletRequest request, HttpServletResponse response) throws GIMException {
 
         String immagini = new JSONObject().toString();
 
@@ -141,5 +126,4 @@ public class ImmagineControl {
 
         return immagini;
     }
-
 }
