@@ -2,6 +2,7 @@ package QuixelTexel.IS.Control.GAC;
 
 import QuixelTexel.IS.Exception.Session.MissingSessionEmailException;
 import QuixelTexel.IS.Exception.GAC.*;
+import QuixelTexel.IS.Service.GAC.UtenteService;
 import QuixelTexel.IS.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import QuixelTexel.IS.Service.GAC.UtenteService;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -22,10 +21,20 @@ import java.security.NoSuchAlgorithmException;
 public class UtenteControl {
 
     @Autowired
-    public UtenteService utenteService;
+    private UtenteService utenteService;
 
+    /**
+     * Gestisce la richiesta di signup di un nuovo utente.
+     *
+     * @param signup Stringa JSON contenente le informazioni relative all'utente da registrare.
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GACException Eccezione generica del gestore degli accessi (GAC).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GACException
+     */
     @RequestMapping(value = "/gestoreAccessi/signup", method = RequestMethod.POST)
-
     public void signup(@RequestBody String signup, HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         JSONParser parser = new JSONParser();
@@ -94,8 +103,18 @@ public class UtenteControl {
         }
     }
 
+    /**
+     * Gestisce la richiesta di accesso di un utente al sistema.
+     *
+     * @param login Stringa JSON contenente le credenziali di accesso dell'utente.
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GACException Eccezione generica del gestore degli accessi (GAC).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GACException
+     */
     @RequestMapping(value = "/gestoreAccessi/login", method = RequestMethod.POST)
-
     public void login(@RequestBody String login, HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         JSONParser parser = new JSONParser();
@@ -116,7 +135,7 @@ public class UtenteControl {
             try {
                 response.sendError(302, "NQTE");
             } catch (IOException ex) {
-                throw new GACException("ERRORE - NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
+                throw new GACException("ERRORE - SQL EXCEPTION || NOSUCHALGORITHEXCEPTION || PARSEEXCEPTION.");
             }
 
         } catch (UserNotFoundException e) {
@@ -138,8 +157,17 @@ public class UtenteControl {
         }
     }
 
+    /**
+     * Gestisce la richiesta di logout di un utente dal sistema.
+     *
+     * @param request Oggetto HttpServletRequest che rappresenta la richiesta HTTP.
+     * @param response Oggetto HttpServletResponse che rappresenta la risposta HTTP.
+     * @throws GACException Eccezione generica del gestore degli accessi (GAC).
+     * @see HttpServletRequest
+     * @see HttpServletResponse
+     * @see GACException
+     */
     @RequestMapping(value = "/gestoreAccessi/logout", method = RequestMethod.POST)
-
     public void logout(HttpServletRequest request, HttpServletResponse response) throws GACException {
 
         try {
