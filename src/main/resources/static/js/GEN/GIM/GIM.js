@@ -20,8 +20,8 @@ function creaDivImmaginiEntità(){
         }
 
         $(div).append('<div class = "titleBar" id="titleBar">'+
-            '            <img class="iconTitle" src="https://i.postimg.cc/HkGsVN4m/img-1.png" id="title">' +
-            '            <label for="title">Gestore Immagini</label>'+
+            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
+            '            <label for="title">Gestore entità</label>'+
             '</div>'+
             ' <div class="breakDivAction">'+
             '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
@@ -39,6 +39,7 @@ function creaDivImmaginiEntità(){
             '<div class="actionDiv" style="margin-top: 0px;">' +
             '                   <button class="bottone" onclick="caricaImmagine()">Carica Immagine</button>' +
             '</div>' +
+            '<div id="errori"></div>' +
             '</div>' +
             '<div class="breakDivAction">' +
             '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
@@ -65,59 +66,6 @@ function creaDivImmaginiEntità(){
 
 }
 
-function downloadFormato(){
-
-    switch (document.getElementsByClassName("selected")[0].innerHTML){
-
-        case "PNG": ottieniImmagineDallaMappa("png"); break;
-        case "JPG": ottieniImmagineDallaMappa("jpg"); break;
-        case "JSON": break;
-        default:
-
-    }
-
-}
-
-function ottieniImmagineDallaMappa(formato) {
-
-    scaricaImmagine(formato);
-
-}
-
-async function effettuaDownload(url, formato) {
-
-    const linkImmagine = document.createElement("a");
-
-    linkImmagine.href = url.toDataURL();
-    linkImmagine.download = "mappa." + formato;
-
-    document.body.appendChild(linkImmagine);
-
-    linkImmagine.click();
-
-    document.body.removeChild(linkImmagine);
-
-}
-
-function scaricaImmagine(formato){
-
-    html2canvas(document.querySelector("#griglia")).then(canvas => {
-
-        document.getElementById("result").append(canvas);
-
-        effettuaDownload(canvas, formato);
-
-        document.getElementById("result").removeChild(canvas);
-
-    });
-
-}
-
-function visualizzaNomeImmagine(nomeImmagine) {
-
-    $('#nomeIns').val(nomeImmagine);
-}
-
 function caricaImmagine() {
 
     let xhr = new XMLHttpRequest();
@@ -126,10 +74,32 @@ function caricaImmagine() {
     xhr.open('POST', '/gestoreImmagini/caricaImmagine', true);
 
     xhr.onreadystatechange = function() {
+
         if (xhr.readyState === 4) {
+
             if (xhr.status === 200) {
+
+                if ($("#errori").children().length > 0){
+
+                    $("#errori").empty();
+
+                }
+
                 visualizzaListaImmagini();
-            } else {
+
+            }
+
+            if (xhr.status === 500) {
+
+                let messaggio = JSON.parse(xhr.responseText);
+                erroreImmagine(messaggio.message);
+
+
+            }
+
+            if (xhr.status === 302) {
+
+                window.location.replace("auth");
 
             }
         }
@@ -138,7 +108,6 @@ function caricaImmagine() {
     xhr.send(formDataImmagine);
     xhr.close;
 }
-
 
 function visualizzaListaImmagini(){
 
@@ -180,7 +149,7 @@ function visualizzaListaImmagini(){
 
             if (xhr.status === 500) {
 
-                alert("errore");
+
 
             }
 
@@ -190,4 +159,36 @@ function visualizzaListaImmagini(){
 
     xhr.send();
     xhr.close;
+}
+
+function erroreImmagine(messaggio){
+
+    if ($("#errori").children().length > 0){
+
+        $("#errori").empty();
+
+    }
+
+    switch (messaggio){
+
+        case "NUIE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       Immagine già esistente!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IFSE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       L'Immagine deve essere 32 x 32!</label>" +
+            '</div>'
+
+        );   break;
+
+    }
+
 }
