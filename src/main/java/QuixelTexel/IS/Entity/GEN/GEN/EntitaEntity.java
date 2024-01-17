@@ -1,24 +1,19 @@
 package QuixelTexel.IS.Entity.GEN.GEN;
 
-import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
-import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
-import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "entita")
 public class EntitaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEntita")
@@ -28,9 +23,6 @@ public class EntitaEntity {
 
     @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
     private List<ProprietaEntity> proprietaEntityList;
-
-    @OneToMany(mappedBy = "entitaEntity",cascade = CascadeType.REMOVE)
-    private List<CoordinateEntity> coordinateEntityList;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idMappa",referencedColumnName = "idMappa")

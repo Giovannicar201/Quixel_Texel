@@ -1,20 +1,19 @@
-package QuixelTexel.IS.Entity.GPA.GPL;
+package QuixelTexel.IS.Entity.GPA;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "colore")
 public class ColoreEntity {
+
     @Id
     @Column(name = "idColore")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,7 @@ public class ColoreEntity {
     private String esadecimale;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPalette",referencedColumnName = "idPalette",insertable=false, updatable=false)
+    @JoinColumn(name = "idPalette",referencedColumnName = "idPalette")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private PaletteEntity paletteEntity;
 }

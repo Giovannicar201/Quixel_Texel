@@ -1,23 +1,22 @@
-package QuixelTexel.IS.Entity.GPA.GPL;
+package QuixelTexel.IS.Entity.GPA;
 
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "Palette")
 public class PaletteEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPalette")

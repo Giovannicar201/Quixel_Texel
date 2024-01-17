@@ -3,24 +3,19 @@ package QuixelTexel.IS.Entity.GAC;
 import QuixelTexel.IS.Entity.GEN.GEN.EntitaEntity;
 import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
 import QuixelTexel.IS.Entity.GEV.EventoEntity;
-import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
-import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
-import QuixelTexel.IS.Entity.GPA.GPL.PaletteEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name="utente")
 public class UtenteEntity {
+
     @Id
     @Column(name = "email")
     private String email;

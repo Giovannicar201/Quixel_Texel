@@ -1,24 +1,21 @@
 package QuixelTexel.IS.Entity.GEV;
 
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
-import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "evento")
 public class EventoEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idEvento")
@@ -37,6 +34,6 @@ public class EventoEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UtenteEntity utenteEntity;
 
-    @OneToMany(mappedBy = "eventoEntity",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "eventoEntity",cascade = CascadeType.ALL)
     private List<IstruzioneEntity> istruzioneEntityList;
 }

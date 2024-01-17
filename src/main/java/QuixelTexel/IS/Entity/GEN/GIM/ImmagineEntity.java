@@ -1,24 +1,22 @@
 package QuixelTexel.IS.Entity.GEN.GIM;
 
+import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import QuixelTexel.IS.Entity.GEN.GEN.EntitaEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import QuixelTexel.IS.Entity.GAC.UtenteEntity;
-
 import java.sql.Blob;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "immagine")
 public class ImmagineEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFoto")
