@@ -14,277 +14,280 @@
 
 <body style="background-color:#1A1A1A;">
 
-    <div class="home">
+<div class="home">
 
-        <div class="row esplora">
+    <div class="row esplora">
 
-            <div class="col notShow">
+        <div class="col notShow">
 
-                <h1 style="font-size: 85px" class="h1 notShow">Quixel Texel</h1>
+            <h1 style="font-size: 85px" class="h1 notShow">Quixel Texel</h1>
 
-                <p>"Dove i sogni diventano pixel, la fantasia diventa quadratino e la felicità prende forma"</p>
-
-            </div>
-
-            <div class="col" style="margin-left: 10.5%">
-
-                <div class="card notShow">
-
-                    <h3>Mappa</h3>
-                    <a href="#tilemap">Attraverso la sezione "Mappa" potrai creare e gestire la tua mappa.
-                        Dai sfogo alla tua immaginazione.</a>
-
-                </div>
-
-                <div class="card notShow">
-
-                    <h3>Pixel art</h3>
-                    <a href="#tilecreator">Attraverso la sezione "Pixel art" potrai creare i tuoi tile direttamente all'interno di Quixel Texel,
-                        e utilizzarli per comporre le tue mappe.</a>
-
-                </div>
-
-                <div class="card notShow">
-
-                    <h3>Eventi</h3>
-                    <a href="#event">Attraverso la sezione "Eventi" potrai definire degli eventi sulla mappa,
-                        rendendo il tuo mondo vivo e immersivo.</a>
-
-                </div>
-
-                <div class="card notShow">
-
-                    <h3>Entità</h3>
-                    <a href="#entity">Attraverso la sezione "Entità" potrai definire le entità che potrai usare per comporre la tua mappa.</a>
-
-                </div>
-
-            </div>
+            <p>"Dove i sogni diventano pixel, la fantasia diventa quadratino e la felicità prende forma"</p>
 
         </div>
 
-        <div class="row tilemap" id="tilemap">
+        <div class="col" style="margin-left: 10.5%">
 
-            <div class="col notShow" style="margin-left: 8%">
+            <div class="card notShow">
 
-                <div class="demoEvent notShow" style="display: grid; height: 400px; margin-top: 18% ">
-
-                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px;  margin: 22% 10%;">
-
-                        <div class="topActionDiv">
-
-                            <label>Demo Mappa</label>
-
-                        </div>
-
-                        <div class="demoName actionDiv notShow">
-                            <label for="largezza">Larghezza</label>
-                            <input type="number" id="largezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
-                        </div>
-
-                        <div class="actionDiv notShow">
-                            <label for="altezza">Altezza</label>
-                            <input type="number" id="altezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
-                        </div>
-
-                    </div>
-
-                    <div id="mappa" class = "griglia mappa" style="grid-row: 1; grid-column: 2; margin-top: 42%;"></div>
-                    
-                    <img src="https://i.postimg.cc/63zzqqFw/tile0.png" id="coloreMappa" hidden="hidden"/>
-                    
-                </div>
+                <h3>Mappa</h3>
+                <a href="#tilemap">Attraverso la sezione "Mappa" potrai creare e gestire la tua mappa.
+                    Dai sfogo alla tua immaginazione.</a>
 
             </div>
 
-            <div class="col notShow" style="margin-left: 10%">
+            <div class="card notShow">
 
-                <h1 style="font-size: 85px" class="h1 notShow">Il nostro <br> editor:</h1>
-
-                <p>Con la comodità di una Web App, un interfaccia semplice e di facile utilizzo,
-                il nostro Map Editor vi permetterà di creare le vostre Tile-Map dal vostro browser!.</p>
-
-            </div>
-
-        </div>
-
-        <div class="row manager" id="tilecreator">
-
-            <div class="col notShow">
-
-                <h1 style="font-size: 85px" class="h1 notShow">Crea i tuoi Tile:</h1>
-
-                <p>Definite i vostri tile ed esportateli in una cartella del progetto comodamente tramite un semplice click!</p>
+                <h3>Pixel art</h3>
+                <a href="#tilecreator">Attraverso la sezione "Pixel art" potrai creare i tuoi tile direttamente all'interno di Quixel Texel,
+                    e utilizzarli per comporre le tue mappe.</a>
 
             </div>
 
-            <div class="col notShow" style="margin-left: 8%">
+            <div class="card notShow">
 
-                <div class="demoEvent notShow" style="display: grid; height: 400px; margin-top: 18%;">
-
-                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 22% 10%;">
-
-                        <div class="topActionDiv">
-
-                            <label>Demo Creazione Tile</label>
-
-                        </div>
-
-                        <div class="demoName actionDiv notShow">
-                            <label for="cartella">Nome cartella</label>
-                            <input type="text" id="cartella" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="demo" disabled>
-                        </div>
-
-                        <div class="actionDiv notShow">
-                            <label>Colore Scelto:</label>
-                            <div class="squarePixelArt" id="colore" style="background-color: #516f96"></div>
-                        </div>
-
-                    </div>
-
-                    <div id="pixelArt" class = "griglia pixelart" style="grid-row: 1; grid-column: 2; margin-top: 42%;"></div>
-
-                </div>
+                <h3>Eventi</h3>
+                <a href="#event">Attraverso la sezione "Eventi" potrai definire degli eventi sulla mappa,
+                    rendendo il tuo mondo vivo e immersivo.</a>
 
             </div>
 
-        </div>
+            <div class="card notShow">
 
-        <div class="row creator" id="event">
-
-            <div class="col notShow" style="margin-left: 3%">
-
-                <div class="demoEvent notShow" style="display: grid; height: 500px; width: 750px; margin-top: 10.6%;">
-
-                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 40% 5%;">
-
-                        <div class="topActionDiv">
-                            <label>Demo evento</label>
-                        </div>
-
-                        <div class="demoName actionDiv notShow">
-                            <label for="nome">Nome evento</label>
-                            <input type="text" id="nome" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Demo" disabled>
-                        </div>
-
-                        <div class="actionDiv notShow">
-                            <label for="istruzione1">1. Istruzione Testo</label>
-                            <input type="text" id="istruzione1" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Scrivi Qualcosa">
-                        </div>
-
-                        <div class="demoBottone actionDiv notShow">
-                            <button class="bottone" onclick="demo()" style="padding: unset; width: 212px; height: 28px;">Play Evento</button>
-                        </div>
-
-                    </div>
-
-                    <div class="demoShow notShow">
-
-                        <p class="demotesto demo" id="demotesto" style="margin-left: 8px;">
-
-
-
-                        </p>
-
-                    </div>
-
-                </div>
+                <h3>Entità</h3>
+                <a href="#entity">Attraverso la sezione "Entità" potrai definire le entità che potrai usare per comporre la tua mappa.</a>
 
             </div>
-
-            <div class="col notShow" style="margin-left: 10%;">
-
-                <h1 style="font-size: 85px" class="h1 notShow">Event Creator:</h1>
-
-                <p>Date un tocco di interattività alla vostra Mappa, in modo semplice, rapido e veloce!</p>
-
-            </div>
-
-
-        </div>
-
-        <div class="row entity" id="entity">
-
-            <div class="col notShow" style="margin-left: 3%">
-
-                <div class="demoEvent notShow" style="display: grid; height: 460px; width: 750px; margin-top: 10.6%;">
-
-                    <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 40% 8%;">
-
-                        <div class="topActionDiv">
-                            <label>Demo entità</label>
-                        </div>
-
-                        <div class="actionDiv notShow">
-                            <label for="nomeImmagine">Nome Immagine</label>
-                            <input type="text" id="nomeImmagine" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" disabled/>
-                        </div>
-
-                        <div class="demoName actionDiv notShow">
-                            <label for="nomeEntità">Nome Entità</label>
-                            <input type="text" id="nomeEntità" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" disabled/>
-                        </div>
-
-                    </div>
-
-                    <div class="demoShow notShow" style="height: 375px; margin-top:10.7%; margin-left: 6%;">
-
-                        <div style="display: grid; padding: 2%; grid-template-columns: repeat(5, 64px); grid-column-gap: 8px;">
-
-                            <img src="https://i.postimg.cc/63zzqqFw/tile0.png" style="width: 64px; height: 64px;" id="DemoEntity1" name = "TileErbettaChiara.png" class="imgEntity">
-                            <img src="https://i.postimg.cc/x8fBj597/tile1.png" style="width: 64px; height: 64px;" id="DemoEntity2" name = "TileErbettaScura.png" class="imgEntity">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col notShow" style="margin-left: 10%;">
-
-                <h1 style="font-size: 85px" class="h1 notShow">Entity Manager:</h1>
-
-                <p>Definite le vostre entità personalizzate! <br> Create, immaginate, Quixel Texel vi aiuterà a farlo!</p>
-
-            </div>
-
 
         </div>
 
     </div>
 
+    <div class="row tilemap" id="tilemap">
+
+        <div class="col notShow" style="margin-left: 8%">
+
+            <div class="demoEvent notShow" style="display: grid; height: 400px; margin-top: 18% ">
+
+                <div class="demoEventDiv breakDivAction notShow" style="width: 260px;  margin: 22% 10%;">
+
+                    <div class="topActionDiv">
+
+                        <label>Demo Mappa</label>
+
+                    </div>
+
+                    <div class="demoName actionDiv notShow">
+                        <label for="largezza">Larghezza</label>
+                        <input type="number" id="largezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
+                    </div>
+
+                    <div class="actionDiv notShow">
+                        <label for="altezza">Altezza</label>
+                        <input type="number" id="altezza" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="5" value="5" disabled>
+                    </div>
+
+                </div>
+
+                <div id="mappa" class = "griglia mappa" style="grid-row: 1; grid-column: 2; margin-top: 42%;"></div>
+
+                <img src="https://i.postimg.cc/63zzqqFw/tile0.png" id="coloreMappa" hidden="hidden"/>
+
+            </div>
+
+        </div>
+
+        <div class="col notShow" style="margin-left: 10%">
+
+            <h1 style="font-size: 85px" class="h1 notShow">Il nostro <br> editor:</h1>
+
+            <p>Con la comodità di una Web App, un interfaccia semplice e di facile utilizzo,
+                il nostro Map Editor vi permetterà di creare le vostre Tile-Map dal vostro browser!.</p>
+
+        </div>
+
+    </div>
+
+    <div class="row manager" id="tilecreator">
+
+        <div class="col notShow">
+
+            <h1 style="font-size: 85px" class="h1 notShow">Crea i tuoi Tile:</h1>
+
+            <p>Definite i vostri tile ed esportateli in una cartella del progetto comodamente tramite un semplice click!</p>
+
+        </div>
+
+        <div class="col notShow" style="margin-left: 8%">
+
+            <div class="demoEvent notShow" style="display: grid; height: 400px; margin-top: 18%;">
+
+                <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 22% 10%;">
+
+                    <div class="topActionDiv">
+
+                        <label>Demo Creazione Tile</label>
+
+                    </div>
+
+                    <div class="demoName actionDiv notShow">
+                        <label for="cartella">Nome cartella</label>
+                        <input type="text" id="cartella" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="demo" disabled>
+                    </div>
+
+                    <div class="actionDiv notShow">
+                        <label>Colore Scelto:</label>
+                        <div class="squarePixelArt" id="colore" style="background-color: #516f96"></div>
+                    </div>
+
+                </div>
+
+                <div id="pixelArt" class = "griglia pixelart" style="grid-row: 1; grid-column: 2; margin-top: 42%;"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row creator" id="event">
+
+        <div class="col notShow" style="margin-left: 3%">
+
+            <div class="demoEvent notShow" style="display: grid; height: 500px; width: 750px; margin-top: 10.6%;">
+
+                <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 40% 5%;">
+
+                    <div class="topActionDiv">
+                        <label>Demo evento</label>
+                    </div>
+
+                    <div class="demoName actionDiv notShow">
+                        <label for="nome">Nome evento</label>
+                        <input type="text" id="nome" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Demo" disabled>
+                    </div>
+
+                    <div class="actionDiv notShow">
+                        <label for="istruzione1">1. Istruzione Testo</label>
+                        <input type="text" id="istruzione1" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" placeholder="Scrivi Qualcosa">
+                    </div>
+
+                    <div class="demoBottone actionDiv notShow">
+                        <button class="bottone" onclick="demo()" style="padding: unset; width: 212px; height: 28px;">Play Evento</button>
+                    </div>
+
+                </div>
+
+                <div class="demoShow notShow">
+
+                    <p class="demotesto demo" id="demotesto" style="margin-left: 8px;">
+
+
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col notShow" style="margin-left: 10%;">
+
+            <h1 style="font-size: 85px" class="h1 notShow">Event Creator:</h1>
+
+            <p>Date un tocco di interattività alla vostra Mappa, in modo semplice, rapido e veloce!</p>
+
+        </div>
+
+
+    </div>
+
+    <div class="row entity" id="entity">
+
+        <div class="col notShow" style="margin-left: 3%">
+
+            <div class="demoEvent notShow" style="display: grid; height: 460px; width: 750px; margin-top: 10.6%;">
+
+                <div class="demoEventDiv breakDivAction notShow" style="width: 260px; margin: 40% 8%;">
+
+                    <div class="topActionDiv">
+                        <label>Demo entità</label>
+                    </div>
+
+                    <div class="actionDiv notShow">
+                        <label for="nomeImmagine">Nome Immagine</label>
+                        <input type="text" id="nomeImmagine" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" disabled/>
+                    </div>
+
+                    <div class="demoName actionDiv notShow">
+                        <label for="nomeEntità">Nome Entità</label>
+                        <input type="text" id="nomeEntità" style="margin-top: 9px; width: 212px; height: 20px;" class="inputForm" disabled/>
+                    </div>
+
+                </div>
+
+                <div class="demoShow notShow" style="height: 375px; margin-top:10.7%; margin-left: 6%;">
+
+                    <div style="display: grid; padding: 2%; grid-template-columns: repeat(5, 64px); grid-column-gap: 8px;">
+
+                        <img src="https://i.postimg.cc/63zzqqFw/tile0.png" style="width: 64px; height: 64px;" id="DemoEntity1" name = "TileErbettaChiara.png" class="imgEntity">
+                        <img src="https://i.postimg.cc/x8fBj597/tile1.png" style="width: 64px; height: 64px;" id="DemoEntity2" name = "TileErbettaScura.png" class="imgEntity">
+                        <img src="https://i.postimg.cc/HLHDygmc/pixil-frame-0.png" style="width: 64px; height: 64px;" id="DemoEntity3" name = "Korra.png" class="imgEntity">
+                        <img src="https://i.postimg.cc/SNgbz5sD/corvideu.png" style="width: 64px; height: 64px;" id="DemoEntity4" name = "corvideu.png" class="imgEntity">
+                        <img src="https://i.postimg.cc/fWv66FxD/New-Piskel-2.png" style="width: 64px; height: 64px;" id="DemoEntity5" name = "Darkness.png" class="imgEntity">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col notShow" style="margin-left: 10%;">
+
+            <h1 style="font-size: 85px" class="h1 notShow">Entity Manager:</h1>
+
+            <p>Definite le vostre entità personalizzate! <br> Create, immaginate, Quixel Texel vi aiuterà a farlo!</p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
 </body>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src = "@{/js/GMP/GMP.js}"></script>
-    <script th:src = "@{/js/GMP/GPA/GPA.js}"></script>
-    <script th:src = "@{/js/GMP/GST/GST.js}"></script>
-    <script th:src="@{/js/scrolling.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src = "@{/js/GMP/GMP/GMP.js}"></script>
+<script th:src = "@{/js/GMP/GPA/GPA.js}"></script>
+<script th:src = "@{/js/GST/GST.js}"></script>
+<script th:src="@{/js/HomePage.js}"></script>
 
-    <script>
+<script>
 
-        window.onload = function test() {
+    window.onload = function test() {
 
-            document.getElementById("topmenu").style.backgroundColor = "transparent";
+        document.getElementById("topmenu").style.backgroundColor = "transparent";
 
-        }
+    }
 
-        $(".imgEntity").click(function (){
+    $(".imgEntity").click(function (){
 
-            $("#nomeEntità").val($(this).attr("id"));
-            $("#nomeImmagine").val($(this).attr("name"));
+        $("#nomeEntità").val($(this).attr("id"));
+        $("#nomeImmagine").val($(this).attr("name"));
 
-            $(".imgEntity").css("border", "none");
+        $(".imgEntity").css("border", "none");
 
-            $(this).css("border", "solid 1px #516f96");
+        $(this).css("border", "solid 1px #516f96");
 
-        });
+    });
 
-    </script>
+</script>
 
-    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
-    <link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
+<link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+<link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
 
 </html>
