@@ -165,14 +165,14 @@ public class Validator {
     }
 
     public static boolean isRowValid(String riga, long altezza) {
-        if(riga == null)
+        if(riga == null || riga.compareTo("") == 0)
             return  false;
 
         return Integer.parseInt(riga) >= 0 && Integer.parseInt(riga) <= (altezza - 1);
     }
 
     public static boolean isColumnValid(String colonna, long larghezza) {
-        if(colonna == null)
+        if(colonna == null || colonna.compareTo("") == 0)
             return  false;
 
         return Integer.parseInt(colonna) >= 0 && Integer.parseInt(colonna) <= (larghezza - 1);
@@ -216,10 +216,10 @@ public class Validator {
     }
 
     public static boolean isPositionValid(String riga, String colonna, long altezza, long larghezza) {
-        if(riga == null)
+        if(riga == null || riga.compareTo("") == 0)
             return  false;
 
-        if(colonna == null)
+        if(colonna == null || colonna.compareTo("") == 0)
             return false;
 
         return Integer.parseInt(colonna) >= 0 && Integer.parseInt(colonna) <= (larghezza - 1) && Integer.parseInt(riga) >= 0 && Integer.parseInt(riga) <= (altezza - 1);

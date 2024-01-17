@@ -40,6 +40,9 @@ public class ScatteringServiceImpl implements ScatteringService {
         int altezza = (secondaRiga - primaRiga) + 1;
         int larghezza = (secondaColonna - primaColonna) + 1;
 
+        if(percentualeRiempimento.compareTo("") == 0)
+            throw new InvalidFillPercentageException("ERRORE - PERCENTUALE DI RIEMPIMENTO NON VALIDA");
+
         float percentuale = Float.parseFloat(percentualeRiempimento);
         int totaleDaPiazzare = (int) ((altezza * larghezza * percentuale) / 100);
 
@@ -50,7 +53,12 @@ public class ScatteringServiceImpl implements ScatteringService {
 
         for(int i = 0; i < prioritaEntita.size(); i++) {
 
-            prioritaArray[i] = Float.parseFloat(prioritaEntita.get(i));
+            String priorita = prioritaEntita.get(i);
+
+            if(priorita.compareTo("") == 0 || priorita.contains(".") || priorita.contains("-") || priorita.contains(","))
+                throw new InvalidPriorityPercentageSumException("ERRORE - NUMERO DI PRIORITÀ NON VALIDO.");
+
+            prioritaArray[i] = Float.parseFloat(priorita);
 
             daPiazzareArray[i] = (int) ((totaleDaPiazzare * prioritaArray[i]) / 100);
 
