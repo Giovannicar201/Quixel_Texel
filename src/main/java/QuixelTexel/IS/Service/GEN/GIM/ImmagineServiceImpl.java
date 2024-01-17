@@ -1,5 +1,9 @@
 package QuixelTexel.IS.Service.GEN.GIM;
 
+import QuixelTexel.IS.Entity.GAC.UtenteEntity;
+import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
+import QuixelTexel.IS.Exception.GEN.GIM.InvalidFileSizeException;
+import QuixelTexel.IS.Exception.GEN.GIM.NotUniqueImageException;
 import QuixelTexel.IS.Repository.GEN.GIM.ImmagineRepository;
 import QuixelTexel.IS.Service.GAC.UtenteService;
 import jakarta.transaction.Transactional;
@@ -8,10 +12,6 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import QuixelTexel.IS.Entity.GAC.UtenteEntity;
-import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
-import QuixelTexel.IS.Exception.GEN.GIM.InvalidFileSizeException;
-import QuixelTexel.IS.Exception.GEN.GIM.NotUniqueImageException;
 
 import javax.imageio.ImageIO;
 import javax.sql.rowset.serial.SerialBlob;
@@ -25,9 +25,8 @@ import java.util.Base64;
 import java.util.List;
 
 @Service
-public class ImmagineServiceImpl
-        implements ImmagineService {
-
+public class ImmagineServiceImpl implements ImmagineService {
+    
     @Autowired
     private ImmagineRepository immagineRepository;
     @Autowired
@@ -36,12 +35,15 @@ public class ImmagineServiceImpl
     @Override
     @Transactional
     public void caricaImmagine(MultipartFile immagine, String email)
-            throws SQLException, IOException, InvalidFileSizeException, NotUniqueImageException {
+            throws SQLException,
+            IOException,
+            InvalidFileSizeException,
+            NotUniqueImageException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
         ImmagineEntity immagineEntity = new ImmagineEntity();
-
+        
         if(!isImageSizeValid(immagine))
             throw new InvalidFileSizeException("ERRORE - DIMENSIONE NON VALIDA.");
 
@@ -61,9 +63,8 @@ public class ImmagineServiceImpl
         immagineRepository.save(immagineEntity);
     }
 
-    private static Blob convertMultipartFileToBlob(MultipartFile multipartFile)
-            throws SQLException, IOException {
-
+    private static Blob convertMultipartFileToBlob(MultipartFile multipartFile) throws SQLException, IOException {
+        
         InputStream inputStream = multipartFile.getInputStream();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -79,9 +80,8 @@ public class ImmagineServiceImpl
         return new SerialBlob(bytes);
     }
 
-    private static boolean isImageSizeValid(MultipartFile file)
-            throws IOException {
-
+    private static boolean isImageSizeValid(MultipartFile file) throws IOException {
+        
         BufferedImage image = ImageIO.read(file.getInputStream());
 
         return image.getWidth() == 32 && image.getHeight() == 32;
@@ -89,22 +89,7 @@ public class ImmagineServiceImpl
 
     @Override
     @Transactional
-    public void integraPixelArt(MultipartFile immagine, String nome, String email) {
-        /*TO-DO*/ //integrazione immagine
-    }
-
-    @Override
-    @Transactional
-    public ImmagineEntity get(String nome, String email) {
-
-        UtenteEntity utenteEntity = utenteService.get(email);
-
-        return immagineRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
-    }
-
-    @Override
-    public String visualizzaListaImmagini(String email)
-            throws SQLException {
+    public String visualizzaListaImmagini(String email) throws SQLException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
@@ -120,7 +105,7 @@ public class ImmagineServiceImpl
             Blob immagine = immagineEntity.getImmagine();
             byte[] bytes = immagine.getBytes(1, (int) immagine.length());
 
-            immagineJSON.put(immagineEntity.getNome(), Base64.getEncoder().encodeToString(bytes));
+            immagineJSON.put(immagineEntity.getNome(),Base64.getEncoder().encodeToString(bytes));
 
             blobImmagini.add(immagineJSON);
         }
@@ -130,4 +115,18 @@ public class ImmagineServiceImpl
         return immaginiJSON.toString();
     }
 
+    @Override
+    @Transactional
+    public ImmagineEntity get(String nome, String email) {
+
+        UtenteEntity utenteEntity = utenteService.get(email);
+
+        return immagineRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
+    }
+
+    @Override
+    @Transactional
+    public void save(ImmagineEntity immagineEntity) {
+        immagineRepository.save(immagineEntity);
+    }
 }
