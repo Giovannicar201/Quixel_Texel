@@ -1,4 +1,4 @@
-package QuixelTexel.IS.Exception.GMP.GST;
+package QuixelTexel.IS.Exception.GST;
 
 public class InvalidRowException extends GSTException {
     public InvalidRowException(String message) {
