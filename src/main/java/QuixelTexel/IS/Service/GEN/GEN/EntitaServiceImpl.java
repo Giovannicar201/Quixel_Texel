@@ -14,8 +14,11 @@ import QuixelTexel.IS.Utility.Validator;
 import jakarta.transaction.Transactional;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
@@ -23,8 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class EntitaServiceImpl
-    implements EntitaService{
+public class EntitaServiceImpl implements EntitaService {
 
     @Autowired
     private EntitaRepository entitaRepository;
@@ -40,11 +42,21 @@ public class EntitaServiceImpl
     @Override
     @Transactional
     public void creaEntita(String email, String nomeImmagine, String nome, String collisioni, String nomeCartella, List<String> nomiProprieta, List<String> valoriProprieta)
-            throws InvalidCollisionException, FolderNotFoundException, InvalidNumberOfPropertyException, NotUniqueEntityException, InvalidEntityNameException, ImageNotFoundException, ImageAlreadyUsedException {
+            throws InvalidCollisionException,
+            FolderNotFoundException,
+            InvalidNumberOfPropertyException,
+            NotUniqueEntityException,
+            InvalidEntityNameException,
+            ImageNotFoundException,
+            ImageAlreadyUsedException,
+            InvalidPropertyNameException,
+            InvalidPropertyValueException,
+            NotUniquePropertyException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
         EntitaEntity entitaEntity = new EntitaEntity();
+
         EntitaEntity entitaEntityQuery = entitaRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
 
         ImmagineEntity immagineEntityQuery = immagineService.get(nomeImmagine,email);
@@ -74,35 +86,92 @@ public class EntitaServiceImpl
         if(!Validator.isNumberOfPropertyValid(nomiProprieta.size()))
             throw new InvalidNumberOfPropertyException("ERRORE - NUMERO DI PROPRIETÀ NON VALIDO.");
 
+        Iterator<String> iteratoreNomi = nomiProprieta.iterator();
+        Iterator<String> iteratoreValori = valoriProprieta.iterator();
+
         entitaEntity.setUtenteEntity(utenteEntity);
         entitaEntity.setImmagineEntity(immagineEntityQuery);
         entitaEntity.setNome(nome);
         entitaEntity.setCollisione(collisioni);
         entitaEntity.setCartellaEntity(cartellaEntityQuery);
 
-        Iterator<String> iteratoreNomi = nomiProprieta.iterator();
-        Iterator<String> iteratoreValori = valoriProprieta.iterator();
+        entitaRepository.save(entitaEntity);
 
         while (iteratoreNomi.hasNext() && iteratoreValori.hasNext()) {
             String nomeProprieta = iteratoreNomi.next();
             String valoreProprieta = iteratoreValori.next();
 
-            ProprietaEntity proprietaEntity = new ProprietaEntity();
+            try {
 
-            proprietaEntity.setNome(nomeProprieta);
-            proprietaEntity.setValore(valoreProprieta);
-            proprietaEntity.setEntitaEntity(entitaEntity);
+                proprietaService.creaProprieta(nomeProprieta, valoreProprieta, entitaEntity);
 
-            proprietaService.save(proprietaEntity);
+            } catch (InvalidPropertyNameException e) {
+
+                entitaRepository.delete(entitaEntity);
+
+                throw new InvalidPropertyNameException("ERRORE - NOME PROPRIETÀ NON VALIDO.");
+
+            } catch (NotUniquePropertyException e) {
+
+                entitaRepository.delete(entitaEntity);
+
+                throw new NotUniquePropertyException("ERRORE - PROPRIETÀ GIÀ ESISTENTE.");
+
+            } catch (InvalidPropertyValueException e) {
+
+                entitaRepository.delete(entitaEntity);
+
+                throw new InvalidPropertyValueException("ERRORE - VALORE PROPRIETÀ NON VALIDO.");
+
+            }
         }
-
-        entitaRepository.save(entitaEntity);
     }
 
     @Override
     @Transactional
-    public String visualizzaEntita(String nome, String email)
-            throws EntityNotFoundException {
+    public String eliminaEntita(String mappa, String nome, String email)
+            throws EntityNotFoundException,
+            ParseException {
+
+        JSONParser parser = new JSONParser();
+
+        UtenteEntity utenteEntity = utenteService.get(email);
+
+        EntitaEntity entitaEntityQuery = entitaRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
+
+        if(entitaEntityQuery == null)
+            throw new EntityNotFoundException("ERRORE - ENTITÀ NON ESISTENTE.");
+
+        JSONObject mappaJSON = (JSONObject) parser.parse(mappa);
+
+        JSONArray entita = (JSONArray) mappaJSON.get("mappa");
+
+        int id = entitaEntityQuery.getId();
+
+        for (Object entitaOBJ : entita) {
+            JSONObject entitaJSON = (JSONObject) entitaOBJ;
+
+            int idEntita = Math.toIntExact((Long) entitaJSON.get("id"));
+
+            if(id == idEntita) {
+                entitaJSON.put("id",0);
+                entitaJSON.put("riga",entitaJSON.get("riga"));
+                entitaJSON.put("colonna",entitaJSON.get("colonna"));
+                entitaJSON.put("immagine","");
+            }
+
+        }
+
+        entitaRepository.delete(entitaEntityQuery);
+
+        mappaJSON.put("mappa",entita);
+
+        return mappaJSON.toString();
+    }
+
+    @Override
+    @Transactional
+    public String visualizzaEntita(String nome, String email) throws EntityNotFoundException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
@@ -130,17 +199,19 @@ public class EntitaServiceImpl
 
     @Override
     @Transactional
-    public String visualizzaListaEntitaInCartella(String email, String nomeCartella)
-            throws SQLException {
+    public String visualizzaListaEntitaInCartella(String email, String nomeCartella) throws SQLException, FolderNotFoundException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
-        CartellaEntity cartellaEntity = cartellaService.get(nomeCartella,email);
+        CartellaEntity cartellaEntityQuery = cartellaService.get(nomeCartella,email);
 
         JSONObject immaginiJSON = new JSONObject();
         JSONArray blobImmagini = new JSONArray();
 
-        List<EntitaEntity> entita = entitaRepository.findAllByCartellaEntityAndUtenteEntity(cartellaEntity,utenteEntity);
+        if(cartellaEntityQuery == null)
+            throw new FolderNotFoundException("ERROE - CARTELLA NON ESISTENTE.");
+
+        List<EntitaEntity> entita = entitaRepository.findAllByCartellaEntityAndUtenteEntity(cartellaEntityQuery,utenteEntity);
 
         for(EntitaEntity entitaEntity : entita) {
             JSONObject immagineJSON = new JSONObject();
@@ -160,8 +231,7 @@ public class EntitaServiceImpl
 
     @Override
     @Transactional
-    public String visualizzaListaEntita(String email)
-            throws SQLException {
+    public String visualizzaListaEntita(String email) throws SQLException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
 
@@ -200,5 +270,4 @@ public class EntitaServiceImpl
     public EntitaEntity get(int id) {
         return entitaRepository.findById(id);
     }
-
 }
