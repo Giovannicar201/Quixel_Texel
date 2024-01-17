@@ -9,7 +9,7 @@ import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 
 public class HTMLMapping {
 
-    @GetMapping("/")
+    @GetMapping("/auth")
 
     public String loginRegistrazione(Model model){
 
@@ -48,6 +48,14 @@ public class HTMLMapping {
     public String gestoreEventi(){
 
         return "gestoreEventi";
+
+    }
+
+    @GetMapping("/")
+
+    public String homepage(){
+
+        return "homepage";
 
     }
 }

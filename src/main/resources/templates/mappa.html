@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 
+    <link rel="stylesheet" th:href="@{/styles/grigliaPixelArt/Griglia_PixelArt.css}">
     <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
 
 </head>
@@ -27,8 +28,16 @@
             <img src="https://i.postimg.cc/BQPjnVVL/Tavola-disegno-1-5.png">
         </button>
 
+        <button id="rubber" class = "tools breakBar" onclick="creaDivStrumentoGommaMappa()">
+            <img src="https://i.postimg.cc/d0NsYxf3/Tavola-disegno-1-6.png">
+        </button>
+
         <button id="rettangolare" class = "tools breakBar" onclick="creaDivStrumentoRettangolareMappa()">
             <img src="https://i.postimg.cc/sggnzvSj/Tavola-disegno-1-7.png">
+        </button>
+
+        <button id="scattering" class = "tools breakBar" onclick="creaStrumentoScattering()">
+            <img src="https://i.postimg.cc/RZV34bmt/Tavola-disegno-1-8.png">
         </button>
 
         <button id="generative" class = "tools breakBar" onclick="creaStrumentoGenerativa()">
@@ -49,7 +58,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script th:src = "@{/js/GMP/GMP/GMP.js}"></script>
+<script th:src = "@{/js/GMP/GMP.js}"></script>
 <script th:src = "@{/js/GMP/GCR/GCR.js}"></script>
 <script th:src = "@{/js/GEN/GIM/GIM.js}"></script>
 <script th:src = "@{/js/GEN/GEN.js}"></script>

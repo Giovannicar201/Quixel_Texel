@@ -30,10 +30,28 @@ label{
 
     background-color: #1A1A1A;
     width: 448px;
-    height: 100%;
+    height: 150%;
     position: absolute;
     right: 0;
     top: 32px;
+
+}
+
+.home h1{
+
+    background-color: #262727;
+    color: transparent;
+    background-image: linear-gradient(#B7B7B7, #B7B7B7);
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -700px 0;
+
+}
+
+.home h1.show{
+
+    animation: showColor 1s linear;
+    animation-fill-mode: forwards;
 
 }
 
@@ -144,6 +162,7 @@ label{
     border-radius: 2%;
     height: auto;
     display: grid;
+    /*justify-content: center;*/
     align-items: start;
     block-size: fit-content;
     padding-left: 14px;
@@ -165,6 +184,264 @@ label{
     display: grid;
     align-items: center;
 
+}
+
+.home{
+
+    width: 100%;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+
+}
+
+.esplora{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/cHyvGKJS/peakpx-1.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.tilemap{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/6pZVBqSc/peakpx-3.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.manager{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/XvdmdqV8/peakpx-4.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.creator{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/hP6RKmCy/peakpx-6.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.entity{
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("https://i.postimg.cc/LhK66s3D/wallpaperflare-com-wallpaper.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.manager img.show:nth-child(1){
+
+    animation: fade-up 1s;
+
+}
+
+.manager img.show:nth-child(2){
+
+    animation: fade-up 2s;
+
+}
+
+.manager img.show:nth-child(3){
+
+    animation: fade-up 2.5s;
+
+}
+
+.demoEvent{
+
+    background-color: #262727;
+    height: 300px;
+    width: 600px;
+    margin: 4%;
+    border-radius: 1%;
+    display: grid;
+
+}
+
+.demoEvent.show{
+
+    animation: fade-down 1s;
+
+}
+
+.demoEventDiv.show{
+
+    animation: fade-down 1.2s;
+
+}
+
+.demoShow{
+
+    background-color: #1A1A1A;
+    grid-column: 2;
+    width: 400px;
+    height: 390px;
+    margin-top:14.7%;
+    border-radius: 2%;
+
+}
+
+.demoShow.show{
+
+    animation: fade-down 1.6s;
+
+}
+
+.row{
+
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    scroll-snap-align: start;
+
+}
+
+.col{
+
+    flex-basis: 35%;
+    animation: fade-up 0.5s;
+    margin-left: 5%;
+
+}
+
+.col p{
+
+    font-size: 22px;
+
+}
+
+.col a{
+
+    color: #B7B7B7;
+    text-decoration: none;
+
+}
+
+.card{
+
+    font-size: 15px;
+    width: 700px;
+    height: 150px;
+    display: block;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 20px 30px;
+    background-color: #26272780;
+
+}
+
+.notShow{
+
+    opacity: 0;
+
+}
+
+.col.show{
+
+    transition: transform 5ms;
+    animation: fade-down 0.5s;
+
+}
+
+.card:hover{
+
+    transform: translateY(-10px);
+
+}
+
+.card.show{
+
+    opacity: 1;
+    animation: fade-card 1s;
+
+}
+
+h5{
+
+    text-shadow: 0 0 5px #999;
+
+}
+
+@keyframes fade-down {
+
+    0%{
+
+        opacity: 0;
+        transform: translateY(-30px) scale(0.9);
+
+    }
+
+    100%{
+
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+
+    }
+
+}
+
+@keyframes fade-up {
+
+    0%{
+
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+
+    }
+
+    100%{
+
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+
+    }
+
+}
+
+@keyframes fade-card {
+
+    0%{
+
+        filter: blur(5px);
+        transform: translateX(-100%);
+        transition: all 1s;
+
+    }
+
+    100%{
+
+        filter: blur(0);
+        transform: translateX(0);
+
+    }
+
+}
+
+@keyframes showColor {
+
+    100%{
+
+        background-position: 0 0;
+
+    }
+
+}
+
+#show1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.imageContainer {
+    margin: 4px;
+    cursor: pointer;
 }
 
 .popStyle{
@@ -196,7 +473,7 @@ label{
     border: none;
     height: 64px;
     width: 64px;
-    margin-left: 50%;
+    margin-left: 30%;
     margin-top: 4px;
 
 }
