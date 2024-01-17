@@ -193,6 +193,8 @@ function creaEntità() {
             }
 
             visualizzaListaEntità();
+            creaDivGestoreEntità();
+            creaDivGestoreEntità();
 
         }
 
