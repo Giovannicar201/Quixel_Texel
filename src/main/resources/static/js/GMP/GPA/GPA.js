@@ -1,33 +1,6 @@
 let x1;
 let y1;
 
-function creaPixelArt(){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/gestorePixelArt/creaPixelArt', true);
-
-    let pixelArt = {};
-
-    pixelArt.nome = document.getElementById("nomeImmagine").value;
-    pixelArt.altezza = 32 + "";
-    pixelArt.larghezza = 32 + "";
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status == 200){
-
-            disegnaPixelArt(document.getElementById("griglia"));
-
-        }
-
-    };
-
-    xhr.send(JSON.stringify(pixelArt));
-    xhr.close;
-
-}
-
 function creaDivPixelArt(){
 
     let div = document.getElementById("info");
@@ -84,6 +57,35 @@ function creaDivPixelArt(){
     }
 }
 
+function creaPixelArt(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestorePixelArt/creaPixelArt', true);
+
+    let pixelArt = {};
+
+    pixelArt.nome = document.getElementById("nomeImmagine").value;
+    pixelArt.altezza = 32 + "";
+    pixelArt.larghezza = 32 + "";
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status == 200){
+
+            disegnaPixelArt(document.getElementById("griglia"));
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(pixelArt));
+    xhr.close;
+
+}
+
+
+
 
 function disegnaPixelArt(divTile) {
 
@@ -130,6 +132,13 @@ function disegnaDiv(divTile, x, y){
 
             cella.className = "squarePixelArt";
 
+            cella.onmouseover = function test() {
+
+                document.getElementById("ascissa").innerHTML = cella.id.split(",")[1];
+                document.getElementById("ordinata").innerHTML = cella.id.split(",")[0];
+
+            };
+
             inizializzaStrumenti(cella,2);
 
             divTile.append(cella);
@@ -151,8 +160,6 @@ function creaPalette(){
 
     palette.nome = document.getElementById("nome").value;
     palette.esadecimali = prendiEsadecimale();
-
-    console.log(palette);
 
     xhr.onreadystatechange = function() {
 
@@ -264,6 +271,8 @@ function caricaPalette(){
 
             }
 
+            $("#coloriPalette").empty();
+
             let risposta = JSON.parse(xhr.responseText);
 
             risposta.colori.forEach(function (nome){
@@ -315,8 +324,6 @@ function recuperaPA(){
         if (xhr.readyState === 4 && xhr.status === 200) {
 
             let pa = JSON.parse(xhr.responseText);
-
-            console.log(pa);
 
             $("#griglia").empty();
 
@@ -489,7 +496,7 @@ function errorePixelArt(messaggio){
 
             '<div class="actionDiv">'+
             "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
-            "                                                       Palette non esistente!</label>" +
+            "                                                       Palette già esistente!</label>" +
             '</div>'
 
         );   break;
@@ -516,15 +523,8 @@ function errorePixelArt(messaggio){
             window.location.replace("error");
             break;
 
-        case "MSME":
-            window.location.replace("error");
-            break;
 
         case "MSEE":
-            window.location.replace("auth");
-            break;
-
-        case "MSPAE":
             window.location.replace("auth");
             break;
 

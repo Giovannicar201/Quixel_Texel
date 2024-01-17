@@ -23,10 +23,8 @@ function creaDivGestoreEntità(){
 
         document.getElementById("creaGestore").classList.add("pressed");
 
-
-        visualizzaListaEntità();
         $(div).append('<div class = "titleBar" id="titleBar">'+
-            '            <img class="iconTitle" src="https://i.postimg.cc/nz23gNTt/ent.png" id="title">' +
+            '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
             '            <label for="title">Gestore entità</label>'+
             '</div>'+
             ' <div class="breakDivAction">'+
@@ -35,20 +33,20 @@ function creaDivGestoreEntità(){
             '   </div>' +
             '<div class="actionDiv">'+
             '                  <label for="nome">Nome immagine:</label>' +
-            '                  <input type="text" id="nomeImmagine" class="inputForm">' +
+            '                  <input type="text" id="nomeImmagine" class="inputForm" required>' +
             '              </div>'+
             '<div class="actionDiv">'+
             '                  <label>Nome entità:</label>' +
-            '                  <input type="text" id="nome" class="inputForm">' +
+            '                  <input type="text" id="nome" class="inputForm" required>' +
             '              </div>' +
             '<div class="actionDiv">' +
             '                  <label>Collisioni:</label>' +
-            '                   <button onclick="selectButton(\'si\')" value = "si" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
+            '                   <button onclick="selectButton(\'si\')" value = "si" class="bottone selezionato collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 1;">SI</button>' +
             '                   <button onclick="selectButton(\'no\')" value = "no" class="bottone collisioni" style="width: 170px; background-color: #1A1A1A; grid-column: 2;">NO</button>' +
             '              </div>' +
             '<div class="actionDiv">'+
             '                  <label>Nome cartella:</label>' +
-            '                  <input type="text" id="nomeCartella" class="inputForm">' +
+            '                  <input type="text" id="nomeCartella" class="inputForm" required>' +
             '              </div>' +
             '<div id="proprietà">' +
             '</div>' +
@@ -60,7 +58,35 @@ function creaDivGestoreEntità(){
             '              </div>' +
             '<div id="creazione">' +
             '</div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Eliminazione </div>' +
+            '<div class="actionDiv">'+
+            '                  <label>Nome entità:</label>' +
+            '                  <input type="text" class="inputForm" id="nomeDaEliminare">' +
+            '              </div>' +
+            '<div class="actionDiv">' +
+            '                  <button class="bottone" onclick="eliminaEntità()">Elimina Entità</button>' +
+            '              </div>' +
+            '<div id="eliminazione">' +
+            '</div>' +
+            '</div>' +
+            '<div class="breakDivAction">' +
+            '<div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+            '       Entità </div>' +
+            '               <div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content;" id="show">' +
+            '           </div>' +
+            '<div class="actionDiv" style="margin: 8px 8px 16px 2px;">' +
+            '                       <label>Nome Entità</label>' +
+            '                      <input type="text" class="inputForm" id="nomeEntita" style="width: 362px;" disabled/>' +
+            '                   </div>' +
+            '       </div>' +
+            '           ' +
             '</div>');
+
+        visualizzaListaEntità();
+
     } else {
 
         document.getElementById("creaGestore").classList.remove("pressed");
@@ -130,24 +156,6 @@ function creaDivProprietàEntità(){
 
 }
 
-function erroreCreaEntità(){
-
-    if ($("#creazione").children().length > 0){
-
-        $("#creazione").empty();
-
-    }
-
-    $("#creazione").append(
-
-        '<div class="actionDiv">'+
-        "                  <label style='color:rgb(175,80,92);'>Errore Nella Creazione Dell'entità</label>" +
-        '</div>'
-
-    );
-
-}
-
 function showFile(){
 
     let label = document.getElementById("label");
@@ -178,19 +186,92 @@ function creaEntità() {
 
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-            alert("entità creato con successo");
+            if ($("#creazione").children().length > 0){
+
+                $("#creazione").empty();
+
+            }
+
+            visualizzaListaEntità();
 
         }
 
         if (xhr.readyState === 4 && xhr.status === 500) {
 
-            erroreCreaEntità();
+            let messaggio = JSON.parse(xhr.responseText);
+
+            erroreCreaEntità(messaggio.message);
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            if (messaggio.message === 'MSEE'){
+
+                window.location.replace("auth");
+
+            } else {
+
+                erroreCreaEntità(messaggio.message);
+
+            }
 
         }
 
     };
 
     xhr.send(entità);
+    xhr.close;
+
+}
+
+function eliminaEntità() {
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestoreEntita/eliminaEntità', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            visualizzaListaEntità();
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            erroreEliminazioneEntità();
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 400) {
+
+            erroreEliminazioneEntità();
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            if (messaggio.message === 'MSEE'){
+
+                window.location.replace("auth");
+
+            } else {
+
+                erroreEliminazioneEntità();
+
+            }
+
+        }
+
+    };
+
+    xhr.send(document.getElementById("nomeDaEliminare").value);
     xhr.close;
 
 }
@@ -227,6 +308,7 @@ function ottieniEntità(){
 }
 
 function visualizzaListaEntità(){
+
     let xhr= new XMLHttpRequest();
 
     xhr.open('POST', '/gestoreEntita/visualizzaListaEntità', true);
@@ -237,31 +319,29 @@ function visualizzaListaEntità(){
 
             if (xhr.status === 200) {
 
-                $("#show1").empty();
+                $("#show").empty();
 
                 let x = JSON.parse(xhr.responseText);
-                console.log(x);
 
                 x.blobImmagini.forEach(function (entita){
 
-                    let nome = Object.keys(entita)[0];
-                    let src = "data:image;base64," + entita[nome];
+                    let id = Object.keys(entita)[0];
+                    let src = "data:image;base64," + entita[id];
 
-                    let entitaWrapper = document.createElement('div');
-                    entitaWrapper.classList.add('imageContainer');
+                    $("#show").append(
+                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
 
-                    entitaWrapper.innerHTML = '<div class="overlay" onclick="visualizzaNomeImmagine(\'' + nome + '\')">' +
-                        '<img id="' + nome + '" src="' + src + '" style="width: 64px; height: 64px;" class="imgEntity">' +
-                        '</div>';
-
-                    $("#show1").append(entitaWrapper);
                 });
 
-            }
+                $(".imgEntity").click(function (){
 
-            if (xhr.status === 500) {
+                    $("#nomeEntita").val($(this).attr("id"));
 
-                alert("errore");
+                    $(".imgEntity").css("border", "none");
+
+                    $(this).css("border", "solid 1px #516f96");
+
+                });
 
             }
 
@@ -271,4 +351,126 @@ function visualizzaListaEntità(){
 
     xhr.send();
     xhr.close;
+}
+
+
+function erroreCreaEntità(messaggio){
+
+    if ($("#creazione").children().length > 0){
+
+        $("#creazione").empty();
+
+    }
+
+    switch (messaggio) {
+
+        case 'MSEE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Cartella non esistente!</label>" +
+                '</div>'
+            ); break;
+
+        case 'IENE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Il nome può contenere solo lettere!</label>" +
+                '</div>'
+            ); break;
+
+        case 'INPE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Numero Proprietà non valido!</label>" +
+                '</div>'
+            ); break;
+
+        case 'NUEE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Entità esistente!</label>" +
+                '</div>'
+            ); break;
+
+        case 'INFE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Immagine non esistente, controlla il nome!</label>" +
+                '</div>'
+            ); break;
+
+        case 'ICE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Collisioni non inserite, controlla il form!</label>" +
+                '</div>'
+            ); break;
+
+        case 'IAUE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Immagine già usata!</label>" +
+                '</div>'
+            ); break;
+
+        case 'IPNE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Nome proprietà non valido!</label>" +
+                '</div>'
+            ); break;
+
+        case 'NUPE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Nome proprietà non valido!</label>" +
+                '</div>'
+            ); break;
+
+        case 'IPVE':
+
+            $("#creazione").append(
+                '<div class="actionDiv">' +
+                "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                "                                                       Valore proprietà non valido!</label>" +
+                '</div>'
+            ); break;
+    }
+
+}
+
+function erroreEliminazioneEntità(){
+
+    if ($("#eliminazione").children().length > 0){
+
+        $("#eliminazione").empty();
+
+    }
+
+    $("#eliminazione").append(
+
+        '<div class="actionDiv">'+
+        "                  <label style='color:rgb(175,80,92);'>Errore Nell'Eliminazione Dell'entità</label>" +
+        '</div>'
+
+    );
+
 }
