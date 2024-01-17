@@ -4,7 +4,6 @@ import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
 import QuixelTexel.IS.Exception.GEN.GIM.InvalidFileSizeException;
 import QuixelTexel.IS.Exception.GEN.GIM.NotUniqueImageException;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

@@ -5,7 +5,6 @@ import QuixelTexel.IS.Entity.GEN.GEN.ProprietaEntity;
 import QuixelTexel.IS.Exception.GEN.GEN.InvalidPropertyNameException;
 import QuixelTexel.IS.Exception.GEN.GEN.InvalidPropertyValueException;
 import QuixelTexel.IS.Exception.GEN.GEN.NotUniquePropertyException;
-
 import java.util.List;
 
 public interface ProprietaService {
