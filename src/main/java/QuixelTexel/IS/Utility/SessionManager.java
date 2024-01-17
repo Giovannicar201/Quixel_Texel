@@ -66,19 +66,4 @@ public class SessionManager {
 
         return selezioneMappa;
     }
-
-    public static void setSelezionePixelArt(HttpServletRequest request, String selezionePixelArt) {
-
-        request.getSession().setAttribute("selezionePixelArt", selezionePixelArt);
-
-    }
-
-    public static String getSelezionePixelArt(HttpServletRequest request) throws MissingSessionPixelArtSelectionException {
-        String selezionePixelArt = (String) request.getSession().getAttribute("selezionePixelArt");
-
-        if(selezionePixelArt == null)
-            throw new MissingSessionPixelArtSelectionException("ERRORE - NESSUNA SELEZIONE PIXEL ART IN SESSIONE.");
-
-        return selezionePixelArt;
-    }
 }
