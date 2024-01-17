@@ -69,28 +69,6 @@ function creaDivMappa(){
     }
 }
 
-function bottoneDownload(selezione){
-
-    for (let bottoniSelezioneFormato of document.getElementsByClassName("bottone")) {
-
-        if (bottoniSelezioneFormato.classList.contains("download")) {
-
-            bottoniSelezioneFormato.style.backgroundColor = "#1A1A1A";
-            bottoniSelezioneFormato.classList.remove("selected");
-
-        }
-
-        if(bottoniSelezioneFormato.classList.contains(selezione)){
-
-            bottoniSelezioneFormato.style.backgroundColor = "#516f96";
-            bottoniSelezioneFormato.classList.add("selected");
-
-        }
-
-    }
-
-}
-
 function creaMappa(altezza, larghezza, nome){
 
     let xhr = new XMLHttpRequest();
@@ -108,18 +86,21 @@ function creaMappa(altezza, larghezza, nome){
 
     xhr.onreadystatechange = function() {
 
-        if (xhr.readyState === 4 && xhr.status === 200) {
-
-
-
-        }
-
         if (xhr.readyState === 4 && xhr.status === 302) {
 
+            let messaggio = JSON.parse(xhr.responseText);
 
+            erroreMappa(messaggio.message);
 
         }
 
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            erroreMappa(messaggio.message);
+
+        }
     };
 
     xhr.send(JSON.stringify(map));
@@ -172,6 +153,18 @@ function recuperaMappa(){
             console.log(map.mappa[map.mappa.length - 1].colonna);
 
             creaStile(parseInt(map.mappa[map.mappa.length - 1].colonna) + 1, "32px");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            if (messaggio.message === "MSEE"){
+
+                window.location.href = "auth";
+
+            }
 
         }
 
@@ -277,5 +270,55 @@ function creaStile(colonne, px){
         "}"));
 
     document.head.append(stileMappa);
+
+}
+
+function erroreMappa(messaggio){
+
+    if ($("#errori").children().length > 0){
+
+        $("#errori").empty();
+
+    }
+
+    switch (messaggio){
+
+        case "MSEE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       Devi effettuare il Log-In o la Registrazione prima!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IMWE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       La lunghezza massima è 32px, quella minima è 1px!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IMHE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       L'altezza massima è 32px, quella minima è 1px!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "IMNE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       Il nome della mappa può contenere solo lettere!</label>" +
+            '</div>'
+
+        );   break;
+
+    }
 
 }
