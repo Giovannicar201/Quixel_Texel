@@ -4,11 +4,9 @@ import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import QuixelTexel.IS.Entity.GEN.GEN.EntitaEntity;
 import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
 import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
-import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

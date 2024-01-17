@@ -4,7 +4,6 @@ import QuixelTexel.IS.Entity.GPA.PaletteEntity;
 import QuixelTexel.IS.Exception.GPA.GPL.InvalidNumberColorException;
 import QuixelTexel.IS.Exception.GPA.GPL.InvalidPaletteNameException;
 import QuixelTexel.IS.Exception.GPA.GPL.PaletteCreationException;
-
 import java.util.List;
 
 public interface PaletteService {

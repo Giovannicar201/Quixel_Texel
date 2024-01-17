@@ -4,7 +4,6 @@ import QuixelTexel.IS.Exception.GEN.GIM.NotUniqueImageException;
 import QuixelTexel.IS.Exception.GPA.GPA.InvalidPixelArtNameException;
 import QuixelTexel.IS.Service.CanvasService;
 import org.json.simple.parser.ParseException;
-
 import java.sql.SQLException;
 
 public interface PixelArtService extends CanvasService {
