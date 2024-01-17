@@ -12,7 +12,6 @@ import QuixelTexel.IS.Exception.GMP.GCR.InvalidFolderNameException;
 import QuixelTexel.IS.Exception.GMP.GCR.NotUniqueFolderException;
 import QuixelTexel.IS.Repository.GMP.GCR.CartellaRepository;
 import QuixelTexel.IS.Service.GAC.UtenteService;
-
 import java.util.List;
 
 @Service
@@ -23,13 +22,14 @@ public class CartellaServiceImpl implements CartellaService {
     @Autowired
     private UtenteService utenteService;
 
-
     @Override
     @Transactional
-    public void creaCartella(String nome,String email) throws InvalidFolderNameException, NotUniqueFolderException {
+    public void creaCartella(String nome,String email)
+            throws InvalidFolderNameException,
+            NotUniqueFolderException {
 
         UtenteEntity utenteEntity = utenteService.get(email);
-        
+
         CartellaEntity cartellaEntity = new CartellaEntity();
         CartellaEntity cartellaEntityQuery = cartellaRepository.findByNomeAndUtenteEntity(nome,utenteEntity);
 
