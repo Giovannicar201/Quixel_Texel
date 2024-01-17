@@ -1,4 +1,4 @@
-package QuixelTexel.IS.Exception.GMP.GST;
+package QuixelTexel.IS.Exception.GST;
 
 public class GSTException extends Exception {
     public GSTException(String message) {
