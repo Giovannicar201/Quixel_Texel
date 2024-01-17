@@ -42,4 +42,12 @@ public class HTMLMapping {
         return "gestorePixelArt";
 
     }
+
+    @GetMapping("/gestoreEventi")
+
+    public String gestoreEventi(){
+
+        return "gestoreEventi";
+
+    }
 }

@@ -32,11 +32,11 @@ function creaDivMappa(){
                 '              </div>' +
                 '<div class="actionDiv">'+
                 '                  <label for="larghezza">Larghezza:</label>' +
-                '                  <input type="number" id="larghezza" class="inputForm" required>' +
+                '                  <input type="number" id="larghezza" class="inputForm" max="32" required>' +
                 '              </div>' +
                 '<div class="actionDiv">' +
                 '                  <label for="altezza">Altezza:</label>' +
-                '                  <input type="number" id="altezza" class="inputForm" required>' +
+                '                  <input type="number" id="altezza" class="inputForm" max="32" required>' +
                 '              </div>' +
                 '<div class="actionDiv">' +
                 '                  <button class="bottone" onclick="creaGriglia()">Crea Mappa</button>' +
@@ -104,59 +104,6 @@ function creaDivMappa(){
     }
 }
 
-function creaMappa(contenitoreGriglia, altezza, larghezza, nome){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/gestoreMappa/creaMappa', true);
-
-    let map = {};
-
-    map.nome = nome;
-
-    console.log(altezza + " " + larghezza);
-
-    map.altezza = altezza.toString();
-    map.larghezza = larghezza.toString();
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status == 200){
-
-            if ($("#errori").children().length > 0){
-
-                $("#errori").empty();
-
-            }
-
-            disegnaMappa(contenitoreGriglia, altezza, larghezza);
-            visualizzaStatisticheMappa();
-
-        }
-
-        if (xhr.readyState === 4 && xhr.status === 302) {
-
-            let messaggio = JSON.parse(xhr.responseText);
-
-            erroreMappa(messaggio.message);
-
-        }
-
-        if (xhr.readyState === 4 && xhr.status === 500) {
-
-            let messaggio = JSON.parse(xhr.responseText);
-
-            erroreMappa(messaggio.message);
-
-        }
-
-    };
-
-    xhr.send(JSON.stringify(map));
-    xhr.close;
-
-}
-
 function creaGriglia(){
 
     let contenitoreGriglia = document.getElementById("griglia");
@@ -173,93 +120,6 @@ function creaGriglia(){
     }
 
     creaMappa(contenitoreGriglia, righe, colonne, document.getElementById("nomeMappa").value);
-
-}
-
-function recuperaMappa(){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/gestoreMappa/recuperaMappa', true);
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status === 200) {
-
-            let map = JSON.parse(xhr.responseText);
-
-            console.log(map);
-
-            $("#griglia").empty();
-
-            map.mappa.forEach(function (mapDiv){
-
-                prendiMappaDallaSessione(mapDiv);
-
-            });
-
-            creaStile(parseInt(map.mappa[map.mappa.length - 1].colonna) + 1, "32px");
-            visualizzaStatisticheMappa();
-
-        }
-
-        if (xhr.readyState === 4 && xhr.status === 302) {
-
-            let messaggio = JSON.parse(xhr.responseText);
-
-            if (messaggio.message === "MSEE"){
-
-                window.location.href = "auth";
-
-            }
-
-        }
-
-    };
-
-    xhr.send();
-    xhr.close;
-
-}
-
-function visualizzaStatisticheMappa(){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/gestoreMappa/visualizzaStatisticheMappa', true);
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status === 200) {
-
-            let statistiche = JSON.parse(xhr.responseText);
-
-            $("#LarghezzaMappa").html(statistiche.larghezza);
-            $("#AltezzaMappa").html(statistiche.altezza);
-            $("#copertura").html(statistiche.entitaPiazzate);
-            $("#coperturaPercentuale").html(statistiche.entitaPiazzatePercentuale + " %");
-            $("#celle").html(statistiche.numeroTotaleCelle);
-            $("#celleVuote").html(statistiche.celleVuote);
-            $("#celleVuotePercentuale").html(statistiche.celleVuotePercentuale + " %");
-
-        }
-
-        if (xhr.readyState === 4 && xhr.status === 302) {
-
-            let messaggio = JSON.parse(xhr.responseText);
-
-            if (messaggio.message === "MSEE"){
-
-                window.location.href = "auth";
-
-            }
-
-        }
-
-    };
-
-    xhr.send();
-    xhr.close;
 
 }
 
@@ -361,6 +221,142 @@ function creaStile(colonne, px){
 
 }
 
+function creaMappa(contenitoreGriglia, altezza, larghezza, nome){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestoreMappa/creaMappa', true);
+
+    let map = {};
+
+    map.nome = nome;
+
+    map.altezza = altezza.toString();
+    map.larghezza = larghezza.toString();
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status == 200){
+
+            if ($("#errori").children().length > 0){
+
+                $("#errori").empty();
+
+            }
+
+            disegnaMappa(contenitoreGriglia, altezza, larghezza);
+            visualizzaStatisticheMappa();
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            erroreMappa(messaggio.message);
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 500) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            erroreMappa(messaggio.message);
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(map));
+    xhr.close;
+
+}
+
+function recuperaMappa(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestoreMappa/recuperaMappa', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            let map = JSON.parse(xhr.responseText);
+
+            $("#griglia").empty();
+
+            map.mappa.forEach(function (mapDiv){
+
+                prendiMappaDallaSessione(mapDiv);
+
+            });
+
+            creaStile(parseInt(map.mappa[map.mappa.length - 1].colonna) + 1, "32px");
+            visualizzaStatisticheMappa();
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            if (messaggio.message === "MSEE"){
+
+                window.location.href = "auth";
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
+function visualizzaStatisticheMappa(){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/gestoreMappa/visualizzaStatisticheMappa', true);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+            let statistiche = JSON.parse(xhr.responseText);
+
+            $("#LarghezzaMappa").html(statistiche.larghezza);
+            $("#AltezzaMappa").html(statistiche.altezza);
+            $("#copertura").html(statistiche.entitaPiazzate);
+            $("#coperturaPercentuale").html(statistiche.entitaPiazzatePercentuale + " %");
+            $("#celle").html(statistiche.numeroTotaleCelle);
+            $("#celleVuote").html(statistiche.celleVuote);
+            $("#celleVuotePercentuale").html(statistiche.celleVuotePercentuale + " %");
+
+        }
+
+        if (xhr.readyState === 4 && xhr.status === 302) {
+
+            let messaggio = JSON.parse(xhr.responseText);
+
+            if (messaggio.message === "MSEE"){
+
+                window.location.href = "auth";
+
+            }
+
+        }
+
+    };
+
+    xhr.send();
+    xhr.close;
+
+}
+
 function erroreMappa(messaggio){
 
     if ($("#errori").children().length > 0){
@@ -456,9 +452,6 @@ function erroreMappa(messaggio){
             window.location.replace("error");
             break;
 
-        case "MSME":
-            window.location.replace("auth");
-            break;
 
         case "MSEE":
             window.location.replace("auth");

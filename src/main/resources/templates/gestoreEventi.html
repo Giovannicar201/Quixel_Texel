@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <link rel="stylesheet" th:href="@{/styles/texelStyle.css}">
+</head>
+
+<div th:replace="fragments :: topmenu"></div>
+
+<body>
+
+<div style="position: absolute; left: 14.5%; top: 12.5%; font-size: 15px; background-color: #1A1A1A;border-radius: 2%; width: 650px; height: 600px;">
+  <div id="istruzione" style="display: grid; padding: 4%;">
+  </div>
+</div>
+
+<div class = "break">
+
+  <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+
+    <button id="creaEventi" class = "tools breakBar" onclick="creaEventi()">
+      <img src="https://i.postimg.cc/PxkLPt7x/event.png">
+    </button>
+
+  </div>
+
+  <div class="divBreak" id="info"></div>
+
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src = "@{/js/GEV/GEV.js}"></script>
+
+</html>

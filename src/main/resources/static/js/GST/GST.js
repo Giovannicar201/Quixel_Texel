@@ -10,9 +10,9 @@ function creaStrumentoGenerativa(){
 
     if (document.getElementById("generative").classList.contains("pressed") === false) {
 
-        for (let child of document.getElementById("strumenti").children) {
+        for (let bottoniDiv of document.getElementById("strumenti").children) {
 
-            child.classList.remove("pressed");
+            bottoniDiv.classList.remove("pressed");
 
         }
 
@@ -106,8 +106,6 @@ function creaStrumentoScattering(){
 }
 
 function visualizzaEntitàScattering() {
-
-    console.log(document.getElementById("show").children.length);
 
     for (let i = 0; i < document.getElementById("show").children.length; i++) {
 
@@ -222,13 +220,13 @@ function creaDivMatitaMappa(){
                 '   </div>' +
                 '<div class="actionDiv">'+
                 '                  <label for="nome">Nome cartella:</label>' +
-                '                  <input type="text" id="nome" class="inputForm">' +
+                '                  <input type="text" id="nome" class="inputForm" style="width: 362px;">' +
                 '              </div>' +
                 '<div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 340px; margin-left: 7px;" id="show">' +
                 '           ' +
                 '       </div>'+
                 '<div class="actionDiv">' +
-                '                  <button class="bottone" onclick="ottieniContenutoCartella(0)">Visualizza entità</button>' +
+                '                  <button class="bottone" onclick="ottieniContenutoCartella(0)" style="width: 366px;">Visualizza entità</button>' +
                 '</div>' +
                 '<div id = "errori"></div>' +
                 '</div>'+
@@ -331,6 +329,19 @@ function creaStrumentoGommaPA(){
             $(div).append('<div class = "titleBar" id="titleBar">'+
                 '            <img class="iconTitle" src="https://i.postimg.cc/d0NsYxf3/Tavola-disegno-1-6.png" id="title">' +
                 '            <label for="title">Strumento gomma</label>'+
+                '</div>' +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                '       Cursore' +
+                '   </div>' +
+                '   <div class="actionDiv" style="display: flex;">' +
+                '       <label for= "ascissa">Coordinata X -  </label>' +
+                '       <div id="ascissa"></div>' +
+                '   </div>' +
+                '   <div class="actionDiv" style="display: flex;">' +
+                '       <label for="ordinata">Coordinata Y -  </label>' +
+                '       <div id="ordinata"></div>' +
+                '   </div>' +
                 '</div>');
 
             document.getElementsByClassName("break")[0].style.height = "150%";
@@ -519,8 +530,20 @@ function creaMatitaPA(){
                 '    padding: 2%;" id="coloriPalette"></div>' +
                 '                  </div>' +
                 '                  </div>' +
+                '<div id="errori"></div>' +
                 '              </div>' +
-                '<div id="errori"></div>'  +
+                '<div class="breakDivAction">' +
+                '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                '       Cursore' +
+                '   </div>' +
+                '   <div class="actionDiv" style="display: flex;">' +
+                '       <label for= "ascissa">Coordinata X -  </label>' +
+                '       <div id="ascissa"></div>' +
+                '   </div>' +
+                '   <div class="actionDiv" style="display: flex;">' +
+                '       <label for="ordinata">Coordinata Y -  </label>' +
+                '       <div id="ordinata"></div>' +
+                '   </div>' +
                 '</div>');
 
             document.getElementsByClassName("break")[0].style.height = "150%";
@@ -536,6 +559,72 @@ function creaMatitaPA(){
 
     }
 
+
+}
+
+function creaRipetizioni(ripetizioni){
+
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("griglia").style.visibility = "visible";
+
+    let stile = document.createElement("style");
+
+    stile.appendChild(document.createTextNode(".griglia div{" +
+        "" +
+        "border: none;" +
+        "" +
+        "}"));
+
+    document.head.appendChild(stile);
+
+    document.getElementById("result").innerHTML = "";
+
+    for(let i = 0; i < ripetizioni * ripetizioni; i++){
+
+        html2canvas(document.querySelector("#griglia")).then(canvas => {
+
+            canvas.style.width = "64px";
+            canvas.style.height = "64px";
+
+            if(i === ((ripetizioni * ripetizioni)-1)/2){
+
+                document.getElementById("result").append(canvas);
+
+            } else {
+
+                canvas.style.filter = "brightness(50%)";
+                document.getElementById("result").append(canvas);
+
+            }
+
+        });
+
+    }
+
+    document.getElementById("griglia").style.visibility = "hidden";
+    document.getElementById("result").style.display = "grid";
+    document.getElementById("result").style.gridTemplateColumns = "repeat(" + ripetizioni +", 64px)";
+
+    if (ripetizioni == 5){
+
+        document.getElementById("result").style.margin = "14.5% 24%";
+
+    } else {
+
+        document.getElementById("result").style.margin = "17.5% 26%";
+
+    }
+
+    document.getElementById("result").style.position = "absolute";
+
+    document.getElementById("result").addEventListener("click", function test(){
+
+        document.getElementById("result").innerHTML = "";
+        document.getElementById("griglia").style.visibility = "visible";
+
+    });
+
+    document.head.removeChild(stile);
 
 }
 
@@ -659,116 +748,6 @@ function inizializzaStrumenti(cella, flag) {
 
 }
 
-function selezioneAreaMappa(coordinata1, coordinata2){
-
-    let xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/selezione/selezioneAreaMappa', true);
-
-    let entita = {};
-
-    entita.primaRiga = coordinata1[0].toString();
-    entita.primaColonna = coordinata1[1].toString();
-    entita.secondaRiga = coordinata2[0].toString();
-    entita.secondaColonna = coordinata2[1].toString();
-
-    xhr.onreadystatechange = function() {
-
-        if (xhr.readyState === 4 && xhr.status === 200) {
-
-
-
-        }
-
-    };
-
-    xhr.send(JSON.stringify(entita));
-    xhr.close;
-
-}
-
-function disegnaTile(){
-
-    flagTile = 0;
-
-}
-function selettoreTile() {
-
-    selectorGriglia = [];
-    flagTile = 2;
-
-}
-
-function cancellaTile(){
-
-    flagTile = 1;
-
-}
-
-function creaAnteprima(){
-
-    let flag = document.getElementById("numero").value;
-
-    if (document.getElementById("griglia").children.length === 0){
-
-
-    } else {
-
-        switch (parseInt(flag)) {
-
-            case 1:
-                creaRipetizioni(3);
-                break;
-
-            case 2:
-                creaRipetizioni(5);
-                break;
-
-        }
-
-    }
-
-}
-
-function generaPaletteCasuale(){
-
-    let palette = document.getElementById("coloriPalette");
-    let children = palette.children;
-
-    if(children.length != 0){
-
-        for (let i = 0; i < children.length; i++) {
-
-            if(children[i].classList != undefined) {
-
-                if (children[i].classList.contains("unlocked")) {
-
-                    let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
-                    randomHex = '#' + randomHex;
-
-                    children[i].style.backgroundColor = randomHex;
-
-                }
-
-            }
-
-        }
-
-    } else {
-
-        for (let i = 0; i < 8; i++) {
-
-            let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
-            randomHex = '#' + randomHex;
-
-            creaDiv(randomHex, palette);
-
-        }
-
-    }
-
-}
-
 function creaDiv(hex, palette){
 
     let color = document.createElement('div');
@@ -815,69 +794,113 @@ function creaDiv(hex, palette){
 
 }
 
-function creaRipetizioni(ripetizioni){
+function generaPaletteCasuale(){
 
-    document.getElementById("result").innerHTML = "";
-    document.getElementById("griglia").style.visibility = "visible";
+    let palette = document.getElementById("coloriPalette");
+    let children = palette.children;
 
-    let stile = document.createElement("style");
+    if(children.length != 0){
 
-    stile.appendChild(document.createTextNode(".griglia div{" +
-        "" +
-        "border: none;" +
-        "" +
-        "}"));
+        for (let i = 0; i < children.length; i++) {
 
-    document.head.appendChild(stile);
+            if(children[i].classList != undefined) {
 
-    document.getElementById("result").innerHTML = "";
+                if (children[i].classList.contains("unlocked")) {
 
-    for(let i = 0; i < ripetizioni * ripetizioni; i++){
+                    let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+                    randomHex = '#' + randomHex;
 
-        html2canvas(document.querySelector("#griglia")).then(canvas => {
+                    children[i].style.backgroundColor = randomHex;
 
-            canvas.style.width = "64px";
-            canvas.style.height = "64px";
-
-            if(i === ((ripetizioni * ripetizioni)-1)/2){
-
-                document.getElementById("result").append(canvas);
-
-            } else {
-
-                canvas.style.filter = "brightness(50%)";
-                document.getElementById("result").append(canvas);
+                }
 
             }
 
-        });
-
-    }
-
-    document.getElementById("griglia").style.visibility = "hidden";
-    document.getElementById("result").style.display = "grid";
-    document.getElementById("result").style.gridTemplateColumns = "repeat(" + ripetizioni +", 64px)";
-
-    if (ripetizioni == 5){
-
-        document.getElementById("result").style.margin = "14.5% 24%";
+        }
 
     } else {
 
-        document.getElementById("result").style.margin = "17.5% 26%";
+        for (let i = 0; i < 8; i++) {
+
+            let randomHex = Math.floor(Math.random() * 0xffffff).toString(16);
+            randomHex = '#' + randomHex;
+
+            creaDiv(randomHex, palette);
+
+        }
 
     }
 
-    document.getElementById("result").style.position = "absolute";
+}
 
-    document.getElementById("result").addEventListener("click", function test(){
+function disegnaTile(){
 
-        document.getElementById("result").innerHTML = "";
-        document.getElementById("griglia").style.visibility = "visible";
+    flagTile = 0;
 
-    });
+}
+function selettoreTile() {
 
-    document.head.removeChild(stile);
+    selectorGriglia = [];
+    flagTile = 2;
+
+}
+
+function cancellaTile(){
+
+    flagTile = 1;
+
+}
+
+function creaAnteprima(){
+
+    let flag = document.getElementById("numero").value;
+
+    if (document.getElementById("griglia").children.length === 0){
+
+
+    } else {
+
+        switch (parseInt(flag)) {
+
+            case 1:
+                creaRipetizioni(3);
+                break;
+
+            case 2:
+                creaRipetizioni(5);
+                break;
+
+        }
+
+    }
+
+}
+
+function selezioneAreaMappa(coordinata1, coordinata2){
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/selezione/selezioneAreaMappa', true);
+
+    let entita = {};
+
+    entita.primaRiga = coordinata1[0].toString();
+    entita.primaColonna = coordinata1[1].toString();
+    entita.secondaRiga = coordinata2[0].toString();
+    entita.secondaColonna = coordinata2[1].toString();
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+
+
+        }
+
+    };
+
+    xhr.send(JSON.stringify(entita));
+    xhr.close;
 
 }
 
