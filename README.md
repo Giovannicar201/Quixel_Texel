@@ -19,7 +19,7 @@ Quixel Texel intende migliorare il flusso di lavoro dello sviluppo indie attrave
 ### Benvenuti nella sezione dedicata alla documentazione ufficiale di Quixel Texel.
 #### Qui troverete la JavaDoc di Quixel Texel.
 
-*Link alla JavaDoc:* <a href="https://Giovannicar201.github.io/Quixel_Texel/">***JavaDoc di Quixel Texel***</a>.
+*Link alla JavaDoc:* <a href="https://giovannicar201.github.io/Quixel_Texel/">***JavaDoc di Quixel Texel***</a>.
 
 # Installazione
 
