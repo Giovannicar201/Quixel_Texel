@@ -1,6 +1,9 @@
 package QuixelTexel.IS.Entity.GEN.GEN;
 
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
+import QuixelTexel.IS.Entity.GEN.GIM.ImmagineEntity;
+import QuixelTexel.IS.Entity.GMP.GCR.CartellaEntity;
+import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;

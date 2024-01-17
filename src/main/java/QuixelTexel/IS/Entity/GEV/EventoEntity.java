@@ -1,6 +1,7 @@
 package QuixelTexel.IS.Entity.GEV;
 
 import QuixelTexel.IS.Entity.GAC.UtenteEntity;
+import QuixelTexel.IS.Entity.GMP.GMP.MappaEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
