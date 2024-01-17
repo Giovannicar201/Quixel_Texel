@@ -30,6 +30,7 @@ function creaDivCartellaMappa(){
                 '<div class="actionDiv">' +
                 '                  <button class="bottone" onclick="creaCartella()">Crea Cartella</button>' +
                 '              </div>' +
+                '<div id = "errori"></div>' +
                 '</div>' +
                 '<div class="breakDivAction">'+
                 '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
@@ -64,14 +65,21 @@ function creaCartella(){
 
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-            alert("Cartella creata con successo!");
+            if ($("#errori").children().length > 0){
+
+                $("#errori").empty();
+
+            }
+
             visualizzaListaCartelle();
 
         }
 
         if (xhr.readyState === 4 && xhr.status === 500) {
 
+            let messaggio = JSON.parse(xhr.responseText);
 
+            erroreCartella(messaggio.message);
 
         }
 
@@ -110,7 +118,7 @@ function visualizzaListaCartelle(){
 
             if (xhr.status === 500) {
 
-                alert("errore");
+
 
             }
 
@@ -123,15 +131,16 @@ function visualizzaListaCartelle(){
 
 }
 
-function ottieniContenutoCartella(){
+function ottieniContenutoCartella(flag){
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/matita/visualizzaListaEntitaInCartella', true);
+    xhr.open('POST', '/matita/visualizzaCollezioneElementi', true);
 
     let richiesta = {};
     let nome = document.getElementById("nome");
 
+    richiesta.semaforo = "mappa";
     richiesta.nome = nome.value;
 
     xhr.onreadystatechange = function() {
@@ -140,35 +149,57 @@ function ottieniContenutoCartella(){
 
             if (xhr.status === 200){
 
+                if ($("#errori").children().length > 0){
+
+                    $("#errori").empty();
+
+                }
+
                 $("#show").empty();
 
                 let x = JSON.parse(xhr.responseText);
 
-                x.blobImmagini.forEach(function (immagine) {
+                if (x.blobImmagini.length > 0) {
 
-                    let id = Object.keys(immagine)[0];
-                    let src = "data:image;base64," + immagine[id];
+                    x.blobImmagini.forEach(function (immagine) {
 
-                    $("#show").append(
-                        '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
+                        let id = Object.keys(immagine)[0];
+                        let src = "data:image;base64," + immagine[id];
 
-                });
+                        $("#show").append(
+                            '<img id="' + id + '" src="' + src + '" style ="width: 64px; height: 64px;" class="imgEntity">');
 
-                $(".imgEntity").click(function (){
+                    });
 
-                    $(".imgEntity").removeClass("selected");
+                    if (flag == 1) {
 
-                    $(".imgEntity").css("border", "none");
+                        visualizzaEntitàScattering();
 
-                    $(".imgEntity").css("filter", "none");
+                    }
 
-                    $(this).addClass("selected");
+                    $(".imgEntity").click(function () {
 
-                    $(this).css("border", "solid 1px #516f96");
+                        $(".imgEntity").removeClass("selected")
+                        $(".imgEntity").css("border", "none");
 
-                    $(this).css("filter", "contrast(0.5)");
+                        $(this).addClass("selected");
+                        $(this).css("border", "solid 1px #516f96");
 
-                });
+                    });
+
+                } else {
+
+                    $("#errori").append(
+
+                        '<div class="actionDiv">'+
+                        "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+                        "                                                       Cartella vuota o non trovata! <br>" +
+                        "                                                       Controlla il nome inserito!</label>" +
+                        '</div>'
+
+                    );
+
+                }
 
             }
 
@@ -180,3 +211,49 @@ function ottieniContenutoCartella(){
     xhr.close;
 
 }
+
+function erroreCartella(messaggio){
+
+    if ($("#errori").children().length > 0){
+
+        $("#errori").empty();
+
+    }
+
+    switch (messaggio){
+
+        case "IFNE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       Il nome della cartella può contenere solo lettere!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "NUFE": $("#errori").append(
+
+            '<div class="actionDiv">'+
+            "                  <label style='color:rgb(175,80,92);'>Errore! <br>" +
+            "                                                       Cartella già esistente!</label>" +
+            '</div>'
+
+        );   break;
+
+        case "NQTE":
+            window.location.replace("error");
+            break;
+
+        case "MSME":
+            window.location.replace("error");
+            break;
+
+        case "MSEE":
+            window.location.replace("auth");
+            break;
+
+
+    }
+
+}
+
