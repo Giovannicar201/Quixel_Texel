@@ -74,18 +74,18 @@ function creaStrumentoScattering(){
                 '   </div>' +
                 '   <div class="actionDiv">' +
                 '       <label for= "cartella">Nome cartella</label>' +
-                '       <input type="text" id= "nome" class="inputForm">' +
+                '       <input type="text" id= "nome" class="inputForm" style="width: 362px;">' +
                 '   </div>' +
                 '   <div class="actionDiv">' +
-                '                  <button class="bottone" onclick="ottieniContenutoCartella(1)">Visualizza entità</button>' +
+                '                  <button class="bottone" onclick="ottieniContenutoCartella(1)" style="width: 366px;">Visualizza entità</button>' +
                 '   </div>' +
                 '   <div class="actionDiv">' +
                 '       <label for="entità">Entità</label>' +
-                '       <div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 340px; margin-left: 7px;" id="show"></div>' +
+                '       <div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 352px;" id="show"></div>' +
                 '   </div>' +
                 '   <div class="actionDiv">' +
                 '       <label for="percentuale">Percentuale riempimento</label>' +
-                '       <input type= "number" id= "percentuale" value="0" class="inputForm">' +
+                '       <input type= "number" id= "percentuale" value="0" class="inputForm" style="width: 362px;">' +
                 '   </div>' +
                 '<div id="perc"></div>' +
                 '<div id = "errori"></div>' +
@@ -112,7 +112,7 @@ function visualizzaEntitàScattering() {
         $("#perc").append(
             '   <div class="actionDiv">' +
             '       <label>Priorità entità ' + i + ' (%)</label>' +
-            '       <input type= "number" id="' + i + 'Priorità" value="0" class="inputForm perc">' +
+            '       <input type= "number" id="' + i + 'Priorità" value="0" class="inputForm perc" style="width: 362px;">' +
             '   </div>'
         );
 
@@ -121,7 +121,7 @@ function visualizzaEntitàScattering() {
     $("#perc").append(
 
         '<div class="actionDiv">' +
-        '   <button class="bottone" onclick="scatter()">Riempi Area</button>' +
+        '   <button class="bottone" onclick="scatter()" style="width: 366px;">Riempi Area</button>' +
         '</div>'
     );
 
@@ -222,7 +222,7 @@ function creaDivMatitaMappa(){
                 '                  <label for="nome">Nome cartella:</label>' +
                 '                  <input type="text" id="nome" class="inputForm" style="width: 362px;">' +
                 '              </div>' +
-                '<div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 340px; margin-left: 7px;" id="show">' +
+                '<div class="entityDiv" style="padding: 8px; border-radius: 2px; height: fit-content; width: 352px; margin-left: 7px;" id="show">' +
                 '           ' +
                 '       </div>'+
                 '<div class="actionDiv">' +
