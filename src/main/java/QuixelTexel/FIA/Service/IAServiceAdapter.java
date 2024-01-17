@@ -1,6 +1,6 @@
 package QuixelTexel.FIA.Service;
 
-import QuixelTexel.IS.Service.GMP.GST.IAService;
+import QuixelTexel.IS.Service.GST.IAService;
 import org.json.simple.parser.ParseException;
 
 public class IAServiceAdapter implements IAService {
