@@ -1,14 +1,15 @@
 package QuixelTexel.IS.Service.GAC;
 
+
+import QuixelTexel.IS.Entity.GAC.UtenteEntity;
 import QuixelTexel.IS.Exception.GAC.*;
 import QuixelTexel.IS.Repository.GAC.UtenteRepository;
 import QuixelTexel.IS.Utility.Utility;
 import QuixelTexel.IS.Utility.Validator;
 import jakarta.transaction.Transactional;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import QuixelTexel.IS.Entity.GAC.UtenteEntity;
+
 import java.security.NoSuchAlgorithmException;
 
 @Service
@@ -19,7 +20,13 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void signup(String email, String nome, String password, String passwordRipetuta) throws NoSuchAlgorithmException, InvalidEmailException, InvalidNameException, InvalidPasswordException, SignupPasswordsMismatchException, NotUniqueUserException {
+    public void signup(String email, String nome, String password, String passwordRipetuta)
+            throws NoSuchAlgorithmException,
+            InvalidEmailException,
+            InvalidNameException,
+            InvalidPasswordException,
+            SignupPasswordsMismatchException,
+            NotUniqueUserException {
 
         UtenteEntity utenteEntity = new UtenteEntity();
         UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
@@ -51,7 +58,10 @@ public class UtenteServiceImpl implements UtenteService {
 
     @Override
     @Transactional
-    public void login(String email, String password) throws NoSuchAlgorithmException, UserNotFoundException, LoginPasswordsMismatchException, ParseException {
+    public void login(String email, String password)
+            throws NoSuchAlgorithmException,
+            UserNotFoundException,
+            LoginPasswordsMismatchException {
 
         UtenteEntity utenteEntityQuery = utenteRepository.findByEmail(email);
 
