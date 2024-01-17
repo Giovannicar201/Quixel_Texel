@@ -4,6 +4,7 @@ import QuixelTexel.IS.Exception.Session.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class SessionManager {
+
     public static void setEmail(HttpServletRequest request, String email) {
 
         request.getSession().setAttribute("email", email);

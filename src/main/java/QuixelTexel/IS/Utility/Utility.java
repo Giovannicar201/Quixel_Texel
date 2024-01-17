@@ -5,6 +5,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Utility {
+
+    /**
+     * Cripta una stringa.
+     *
+     * @param string La stringa da criptare.
+     * @return Una rappresentazione esadecimale dell'hash della stringa.
+     * @throws NoSuchAlgorithmException Se l'algoritmo di hashing non è disponibile.
+     */
     public static String encrypt(String string) throws NoSuchAlgorithmException {
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
