@@ -86,7 +86,7 @@ public class Validator {
     private static final Pattern VALORE_ISTRUZIONE_DIALOGO_PATTERN = Pattern.compile(VALORE_ISTRUZIONE_DIALOGO_REGEX);
 
     public static boolean isEmailValid(String email) {
-        if(email == null)
+        if(email == null || email.compareTo("") == 0)
             return false;
 
         boolean gmailMatch = GMAIL_PATTERN.matcher(email).matches();
@@ -97,49 +97,49 @@ public class Validator {
     }
 
     public static boolean isUserNameValid(String nome) {
-        if(nome == null)
+        if(nome == null || nome.compareTo("") == 0)
             return false;
 
         return NOME_UTENTE_PATTERN.matcher(nome).matches();
     }
 
     public static boolean isPasswordValid(String password) {
-        if (password == null)
+        if (password == null || password.compareTo("") == 0)
             return false;
 
         return PASSWORD_PATTERN.matcher(password).matches();
     }
 
     public static boolean isFolderNameValid(String nomeCartella) {
-        if(nomeCartella == null)
+        if(nomeCartella == null || nomeCartella.compareTo("") == 0)
             return false;
 
         return NOME_CARTELLA_PATTERN.matcher(nomeCartella).matches();
     }
 
     public static boolean isPropertyNameValid(String nomeProprieta) {
-        if(nomeProprieta == null)
+        if(nomeProprieta == null || nomeProprieta.compareTo("") == 0)
             return false;
 
         return NOME_PROPRIETA_PATTERN.matcher(nomeProprieta).matches();
     }
 
     public static boolean isPropertyValueValid(String valoreProprieta) {
-        if(valoreProprieta == null)
+        if(valoreProprieta == null || valoreProprieta.compareTo("") == 0)
             return false;
 
         return VALORE_PROPRIETA_PATTERN.matcher(valoreProprieta).matches();
     }
 
     public static boolean isEntityNameValid(String nomeEntita) {
-        if(nomeEntita == null)
+        if(nomeEntita == null || nomeEntita.compareTo("") == 0)
             return false;
 
         return NOME_ENTITA_PATTERN.matcher(nomeEntita).matches();
     }
 
     public static boolean isCollisionValid(String collisione) {
-        if(collisione == null)
+        if(collisione == null || collisione.compareTo("") == 0)
             return false;
 
         return COLLISIONE_PATTERN.matcher(collisione).matches();
@@ -150,7 +150,7 @@ public class Validator {
     }
 
     public static boolean isMapNameValid(String nomeMappa) {
-        if(nomeMappa == null)
+        if(nomeMappa == null || nomeMappa.compareTo("") == 0)
             return false;
 
         return NOME_MAPPA_PATTERN.matcher(nomeMappa).matches();
@@ -179,7 +179,7 @@ public class Validator {
     }
 
     public static boolean isPaletteNameValid(String nomePalette) {
-        if(nomePalette == null)
+        if(nomePalette == null || nomePalette.compareTo("") == 0)
             return false;
 
         return NOME_PALETTE_PATTERN.matcher(nomePalette).matches();
@@ -190,7 +190,7 @@ public class Validator {
     }
 
     public static boolean isPixelArtNameValid(String nomePixelArt) {
-        if(nomePixelArt == null)
+        if(nomePixelArt == null || nomePixelArt.compareTo("") == 0)
             return false;
 
         return NOME_PIXEL_ART_PATTERN.matcher(nomePixelArt).matches();
@@ -209,7 +209,7 @@ public class Validator {
     }
 
     public static boolean isEventNameValid(String nomeEvento) {
-        if(nomeEvento == null)
+        if(nomeEvento == null || nomeEvento.compareTo("") == 0)
             return false;
 
         return NOME_EVENTO_PATTERN.matcher(nomeEvento).matches();
@@ -234,14 +234,14 @@ public class Validator {
     }
 
     public static boolean isDialogValueValid(String valore) {
-        if(valore == null)
+        if(valore == null || valore.compareTo("") == 0)
             return false;
 
         return VALORE_ISTRUZIONE_DIALOGO_PATTERN.matcher(valore).matches();
     }
 
     public static boolean isTextValueValid(String valore) {
-        if(valore == null)
+        if(valore == null || valore.compareTo("") == 0)
             return false;
 
         return VALORE_ISTRUZIONE_TESTO_PATTERN.matcher(valore).matches();
