@@ -18,6 +18,7 @@
     <li><a href="#">Help</a></li>
     <li th:if="${session.email == null}"><a href="auth">Sign-up & Log-in</a></li>
     <li th:if="${session.email != null}"><a href="auth">Log-out</a></li>
+
   </ul>
 
 </div>
