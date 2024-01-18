@@ -1,48 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quixel Texel Documentation</title>
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 50px;
-            background-color: #3f3f3f;
-            color: #b7b7b7;
-        }
 
-        h1 {
-            color: #3498db;
-        }
+        .topmenu{
 
-        p {
-            color: #555;
-        }
-
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
             background-color: #262727;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+            height: 32px;
+            width: 100%;
+            display: flex;
+            z-index: 3000;
+            position: fixed;
+
         }
 
-        a:hover {
-            background-color: #1c1c1c;
+        .logo{
+
+            width: 16px;
+            height: 16px;
+            margin: 6px 10px 4px 8px;
+
         }
+
+        body {
+
+            background-color: #3F3F3F;
+            color: #B7B7B7;
+            margin: 0;
+            font-family: "JetBrains Mono ExtraBold";
+            font-size: 13px;
+
+        }
+
+        a{
+            text-decoration: none;
+            font-family: "JetBrains Mono ExtraBold";
+
+        }
+
+        label{
+
+            font-family: "JetBrains Mono";
+            margin-bottom: 4px;
+
+        }
+
+        .break{
+
+            background-color: #1A1A1A;
+            width: 448px;
+            height: 150%;
+            position: absolute;
+            right: 0;
+            top: 32px;
+
+        }
+
+        .breakDivAction{
+
+            background-color: #3F3F3F;
+            width: 400px;
+            position: relative;
+            right: 0;
+            margin: 32px 8px 8px;
+            border-radius: 2%;
+            height: auto;
+            display: grid;
+            align-items: start;
+            block-size: fit-content;
+            padding-left: 14px;
+            box-sizing: border-box;
+        }
+
+        .topActionDiv{
+
+            margin: 24px 8px 16px 8px;
+            display: grid;
+            justify-content: normal;
+            font-family: "JetBrains Mono";
+            align-items: center;
+
+        }
+
+        .actionDiv{
+
+            margin: 8px 8px 16px 8px;
+            display: grid;
+            align-items: center;
+
+        }
+
+        .divBreak{
+
+            background-color: #333333;
+            width: 416px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            align-items: center;
+
+        }
+
+        .bottone{
+
+            display: block;
+            background-color: #333333;
+            text-align: center;
+            border: none;
+            color: #B7B7B7;
+            text-decoration: none;
+            width: 352px;
+            height: 24px;
+
+        }
+
+        .bottone:hover{
+
+            background-color: #516f96;
+
+        }
+
+        .iconTitle{
+
+            width: 16px;
+            height: 16px;
+            margin: 4px 4px 4px 8px;
+
+        }
+
+        .titleBar label{
+
+            margin-top: 4px;
+            margin-left: 4px;
+            position: relative;
+
+        }
+
+        .titleBar{
+
+            background-color: #3F3F3F;
+            width: inherit;
+            height: 24px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            block-size: fit-content;
+
+        }
+
+        .pressed{
+
+            filter: invert(40%) sepia(42%) saturate(423%) hue-rotate(174deg) brightness(94%) contrast(94%);
+
+
+        }
+
+        .breakBar{
+
+            left: 8px;
+            display: block;
+
+        }
+
+        .tools{
+
+            cursor: pointer;
+            width: fit-content;
+            margin-block: 18px;
+            height: fit-content;
+            background-color: transparent;
+            border: none;
+            appearance: none;
+
+        }
+
     </style>
+
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+
 </head>
+
 <body>
 
-<h1>Benvenuto alla Documentazione di Quixel Texel</h1>
+<div class="topmenu" id="topmenu">
 
-<p>Esplora la documentazione dettagliata per scoprire tutte le potenzialità di Quixel Texel.</p>
+    <img src="https://i.postimg.cc/wv5tLwGS/logo.png" class="logo" id="logo">
 
-<a href="./javadoc" target="_blank">Vai alla Documentazione</a>
+</div>
+
+<div style="position: absolute; top: 50%; left: 24.5%; font-size: 23px; font-family: JetBrains Mono;">
+
+    Nessuna Anteprima
+
+</div>
+
+<div class = "break">
+
+    <div style="width: 32px; position: absolute; top: 36px;" id="strumenti">
+
+        <button id="creaDocumentazione" class = "tools breakBar" onclick="creaDivDocumentazione()">
+            <img src="https://i.postimg.cc/PxkLPt7x/event.png">
+        </button>
+
+    </div>
+
+    <div class="divBreak" id="info"></div>
+
+</div>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function creaDivDocumentazione(){
+
+        let divDocumentazione = document.getElementById("info");
+
+        document.getElementsByClassName("break")[0].style.height = "100%";
+        divDocumentazione.innerHTML = "";
+
+        if (document.getElementById("creaDocumentazione").classList.contains("pressed") === false) {
+
+            for (let child of document.getElementById("creaDocumentazione").children) {
+
+                child.classList.remove("pressed");
+
+            }
+
+            if(divDocumentazione.children.length === 0) {
+
+                $(divDocumentazione).append('<div class = "titleBar" id="titleBar">'+
+                    '            <img class="iconTitle" src="https://i.postimg.cc/PxkLPt7x/event.png" id="title">' +
+                    '            <label for="title">Documentazione</label>'+
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       SOW' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza SOW</button>' +
+                    '            </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       RAD' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza RAD</button>' +
+                    '            </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       SDD' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza SDD</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       ODD' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza ODD</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>'+
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       TPD' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza TPD</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       TCSD' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza TCSD</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       TIR' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza TIR</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       MT' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="" target="_blank">' +
+                    '            <button class="bottone">Visualizza MT</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>' +
+                    '<div class="breakDivAction">' +
+                    '   <div class="topActionDiv" style="margin: 12px 8px 8px 8px;">' +
+                    '       JAVADOC' +
+                    '   </div>' +
+                    '   <div class="actionDiv">' +
+                    '           <a href="./javadoc" target="_blank">' +
+                    '            <button class="bottone">Visualizza JAVADOC</button>' +
+                    '           </a>' +
+                    '   </div>' +
+                    '</div>');
+
+                document.getElementsByClassName("break")[0].style.height = "150%";
+
+            }
+
+            document.getElementById("creaDocumentazione").classList.add("pressed");
+
+        } else {
+
+            document.getElementById("creaDocumentazione").classList.remove("pressed");
+
+        }
+
+
+    }
+
+</script>
+
 </html>
