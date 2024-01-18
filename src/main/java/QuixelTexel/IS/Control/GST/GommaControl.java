@@ -6,7 +6,7 @@ import QuixelTexel.IS.Exception.Session.MissingSessionMapException;
 import QuixelTexel.IS.Exception.Session.MissingSessionPixelArtException;
 import QuixelTexel.IS.Service.GMP.GMP.MappaServiceImpl;
 import QuixelTexel.IS.Service.GPA.GPA.PixelArtServiceImpl;
-import QuixelTexel.IS.Service.GST.GommaService;
+import QuixelTexel.IS.Service.GST.GommaServiceImpl;
 import QuixelTexel.IS.Utility.SessionManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,7 +58,7 @@ public class GommaControl {
 
                 String mappa = SessionManager.getMappa(request);
 
-                GommaService gommaService = new GommaService(mappaService);
+                GommaServiceImpl gommaService = new GommaServiceImpl(mappaService);
 
                 String mappaModificata = gommaService.usa(mappa, null, riga, colonna, email);
 
@@ -68,7 +68,7 @@ public class GommaControl {
 
                 String pixelArt = SessionManager.getPixelArt(request);
 
-                GommaService gommaService = new GommaService(pixelArtService);
+                GommaServiceImpl gommaService = new GommaServiceImpl(pixelArtService);
 
                 String pixelArtModificata = gommaService.usa(pixelArt, null, riga, colonna, email);
 
